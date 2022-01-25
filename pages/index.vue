@@ -1,11 +1,11 @@
 <template>
   <section>
     <h1>Catch them all !</h1>
-    <ul v-if="pokemons && pokemons.length">
-      <li v-for="(pokemon, index) in pokemons" :key="index">
-        <p>{{ pokemon.name }}</p>
-      </li>
-    </ul>
+    <FlexContainer v-if="pokemons && pokemons.length" tag="ul" no-gutter>
+      <FlexItem v-for="(pokemon, index) in pokemons" :key="index" xs6 s4 m3>
+        <PokemonCard :pokemon="pokemon" />
+      </FlexItem>
+    </FlexContainer>
     <p v-else>No pokemons to catch :(</p>
   </section>
 </template>
