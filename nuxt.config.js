@@ -43,6 +43,9 @@ export default {
     baseURL: '/',
   },
 
+  publicRuntimeConfig: {
+    API_URL: process.env.API_URL || 'https://pokeapi.co/api/v2',
+  },
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
 }
