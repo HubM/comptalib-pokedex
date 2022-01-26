@@ -6,7 +6,7 @@
     class="input-search"
     :class="activeClass"
     :placeholder="placeholder"
-    @input="onInput"
+    @change="onChange"
   />
 </template>
 
@@ -26,6 +26,7 @@ export default {
   data() {
     return {
       search: '',
+      debounce: null,
     }
   },
   computed: {
@@ -41,15 +42,17 @@ export default {
     },
   },
   methods: {
-    onInput() {
-      this.$emit('restore-default-pokemons')
+    onChange() {
+      clearTimeout(this.debounce)
+      this.debounce = setTimeout(() => {
+        this.$emit('restore-default-pokemons')
+        if (!this.active) {
+          return
+        }
 
-      if (!this.active) {
-        return
-      }
-
-      const formattedSearch = this.search.trim().toLowerCase()
-      this.$emit('search', formattedSearch)
+        const formattedSearch = this.search.trim().toLowerCase()
+        this.$emit('search', formattedSearch)
+      }, 800)
     },
   },
 }
