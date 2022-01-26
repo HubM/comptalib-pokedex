@@ -22,7 +22,12 @@ export default {
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: {
-    dirs: ['~/components', '~/components/layout/grid', '~/components/pokemons'],
+    dirs: [
+      '~/components',
+      '~/components/layout',
+      '~/components/layout/grid',
+      '~/components/pokemons',
+    ],
   },
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules

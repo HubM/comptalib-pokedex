@@ -1,5 +1,6 @@
-@import 'base/reset';
-@import 'base/variables';
-@import 'base/grid';
+@import 'globals/reset';
+@import 'globals/variables';
+@import 'globals/grid';
 
-@import 'card';
+@import 'app/base';
+@import 'app/card';
