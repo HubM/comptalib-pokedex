@@ -1,7 +1,6 @@
-// const eachSeries = require('async/eachSeries')
-
 export const state = () => ({
   pokemons: [],
+  defaultPokemons: [],
 })
 
 export const getters = {
@@ -11,11 +10,18 @@ export const getters = {
 export const mutations = {
   ADD_POKEMONS(state, pokemons) {
     state.pokemons = pokemons
+    state.defaultPokemons = pokemons
+  },
+  FILTER_POKEMONS(state, pokemons) {
+    state.pokemons = pokemons
+  },
+  RESTORE_DEFAULT_POKEMONS(state) {
+    state.pokemons = state.defaultPokemons
   },
 }
 
 export const actions = {
-  getPokemons({ commit }, payload = { limit: 100 }) {
+  getPokemons({ commit }, payload = { limit: 20 }) {
     return new Promise((resolve, reject) => {
       const { API_URL } = this.app.$config
       const pokemonPromises = []
@@ -39,9 +45,17 @@ export const actions = {
         })
     })
   },
-  searchPokemon({ commit }, payload) {
+  searchPokemon({ commit, state }, search) {
     return new Promise((resolve, reject) => {
-      console.log('I GOT', payload)
+      const filteredPokemons = state.pokemons.filter((pokemon) =>
+        pokemon.name.includes(search)
+      )
+      commit('FILTER_POKEMONS', filteredPokemons)
+    })
+  },
+  restoreDefaultPokemons({ commit }) {
+    return new Promise((resolve, reject) => {
+      commit('RESTORE_DEFAULT_POKEMONS')
     })
   },
 }

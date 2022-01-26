@@ -38,10 +38,13 @@ export default {
   },
   methods: {
     onInput() {
-      if (this.search && this.active) {
-        const formattedSearch = this.search.trim().toLowerCase()
-        this.$emit('search', formattedSearch)
+      if (!this.active) {
+        this.$emit('restore-default-pokemons')
+        return
       }
+
+      const formattedSearch = this.search.trim().toLowerCase()
+      this.$emit('search', formattedSearch)
     },
   },
 }

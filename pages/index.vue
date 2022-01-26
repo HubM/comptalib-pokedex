@@ -5,6 +5,7 @@
       class="margin--bottom--m"
       placeholder="Search a pokemon"
       @search="searchPokemon"
+      @restore-default-pokemons="restoreDefaultPokemons"
     />
     <!-- </flex-item> -->
     <flex-container v-if="pokemons && pokemons.length" tag="ul" no-gutter>
@@ -36,6 +37,7 @@ export default {
     ...mapActions({
       getPokemons: 'pokemons/getPokemons',
       searchPokemon: 'pokemons/searchPokemon',
+      restoreDefaultPokemons: 'pokemons/restoreDefaultPokemons',
     }),
   },
 }
