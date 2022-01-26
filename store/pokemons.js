@@ -1,10 +1,14 @@
+import wait from '~/helpers/functions/wait'
+
 export const state = () => ({
   pokemons: [],
   defaultPokemons: [],
+  loading: false,
 })
 
 export const getters = {
   pokemons: (state) => state.pokemons,
+  loading: (state) => state.loading,
 }
 
 export const mutations = {
@@ -18,11 +22,16 @@ export const mutations = {
   RESTORE_DEFAULT_POKEMONS(state) {
     state.pokemons = state.defaultPokemons
   },
+  SET_LOADING(state, loading) {
+    state.loading = loading
+  },
 }
 
 export const actions = {
   getPokemons({ commit }, payload = { limit: 20 }) {
     return new Promise((resolve, reject) => {
+      commit('SET_LOADING', true)
+
       const { API_URL } = this.app.$config
       const pokemonPromises = []
       const tmpPokemons = []
@@ -37,8 +46,11 @@ export const actions = {
           responses.forEach((response) => {
             tmpPokemons.push(response.data)
           })
-          commit('ADD_POKEMONS', tmpPokemons)
-          resolve()
+          wait().then(() => {
+            commit('ADD_POKEMONS', tmpPokemons)
+            commit('SET_LOADING', false)
+            resolve()
+          })
         })
         .catch((error) => {
           reject(error)

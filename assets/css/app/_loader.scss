@@ -1,0 +1,21 @@
+@keyframes loaderList {
+  from {
+    transform: rotate(0deg);
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+  to {
+    transform: rotate(360deg);
+    opacity: 1;
+  }
+}
+
+.loader--list {
+  display: block;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 150px;
+  animation: loaderList 2s infinite;
+}

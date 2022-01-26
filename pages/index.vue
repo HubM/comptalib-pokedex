@@ -1,19 +1,20 @@
 <template>
   <section>
-    <!-- <flex-item xs12> -->
-    <input-search
-      class="margin--bottom--m"
-      placeholder="Search a pokemon"
-      @search="searchPokemon"
-      @restore-default-pokemons="restoreDefaultPokemons"
-    />
-    <!-- </flex-item> -->
-    <flex-container v-if="pokemons && pokemons.length" tag="ul" no-gutter>
-      <flex-item v-for="(pokemon, index) in pokemons" :key="index" xs6 s4 m3>
-        <pokemon-card :pokemon="pokemon" />
-      </flex-item>
-    </flex-container>
-    <p v-else>No pokemons to catch :(</p>
+    <loader-list v-if="loading" />
+    <div v-else>
+      <input-search
+        class="margin--bottom--m"
+        placeholder="Search a pokemon"
+        @search="searchPokemon"
+        @restore-default-pokemons="restoreDefaultPokemons"
+      />
+      <flex-container v-if="pokemons && pokemons.length" tag="ul" no-gutter>
+        <flex-item v-for="(pokemon, index) in pokemons" :key="index" xs6 s4 m3>
+          <pokemon-card :pokemon="pokemon" />
+        </flex-item>
+      </flex-container>
+      <p v-else>No pokemons to catch :(</p>
+    </div>
   </section>
 </template>
 
@@ -30,6 +31,7 @@ export default {
   computed: {
     ...mapGetters({
       pokemons: 'pokemons/pokemons',
+      loading: 'pokemons/loading',
     }),
   },
 
