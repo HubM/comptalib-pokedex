@@ -46,7 +46,6 @@ export const actions = {
             formatPokemon(response.data)
           )
           commit('ADD_POKEMONS', pokemons)
-          console.log('OUPS', state.pokemons)
         })
         .finally(() => {
           commit('SET_LOADING', false)
@@ -55,12 +54,18 @@ export const actions = {
     })
   },
   searchPokemon({ commit, state }, search) {
-    return new Promise((resolve, reject) => {
-      const filteredPokemons = state.pokemons.filter((pokemon) =>
-        pokemon.name.includes(search)
+    // return new Promise((resolve, reject) => {
+    // const filteredPokemons = state.pokemons.filter((pokemon) =>
+    //   pokemon.name.includes(search)
+    // )
+    // console.log('YO', filteredPokemons)
+    commit(
+      'FILTER_POKEMONS',
+      state.pokemons.filter((pokemon) =>
+        new RegExp(search, 'i').test(pokemon.name)
       )
-      commit('FILTER_POKEMONS', filteredPokemons)
-    })
+    )
+    // })
   },
   restoreDefaultPokemons({ commit }) {
     return new Promise((resolve, reject) => {
