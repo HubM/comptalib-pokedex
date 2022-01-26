@@ -18,6 +18,10 @@ export default {
       type: String,
       default: 'Search a pokemon',
     },
+    pokemons: {
+      type: Array,
+      default: () => [],
+    },
   },
   data() {
     return {
@@ -38,8 +42,9 @@ export default {
   },
   methods: {
     onInput() {
+      this.$emit('restore-default-pokemons')
+
       if (!this.active) {
-        this.$emit('restore-default-pokemons')
         return
       }
 

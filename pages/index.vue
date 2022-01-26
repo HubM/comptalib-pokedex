@@ -5,6 +5,7 @@
       <input-search
         class="margin--bottom--m"
         placeholder="Search a pokemon"
+        :pokemons="pokemons"
         @search="searchPokemon"
         @restore-default-pokemons="restoreDefaultPokemons"
       />
