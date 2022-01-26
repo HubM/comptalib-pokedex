@@ -1,0 +1,36 @@
+body {
+  background-color: $color-dark1;
+  font-family: $font-family;
+  color: $color-font;
+}
+
+header {
+  padding: $spc-x-small;
+  background-color: $color-dark2;
+}
+
+.baseline {
+  text-align: right;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+footer {
+  text-align: center;
+  font-style: italic;
+  font-size: 0.875rem; //14px
+
+  a {
+    color: $color-primary;
+  }
+}
+
+.container {
+  margin: $spc-large 0;
+  width: 100%;
+}
+
+h1 {
+  color: $color-primary;
+}

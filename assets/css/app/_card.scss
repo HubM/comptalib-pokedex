@@ -1,0 +1,34 @@
+.card {
+  width: 100%;
+  max-width: 150px;
+  display: block;
+  margin: 0 auto $spc-x-small auto;
+  padding: $spc-x-small;
+  background: $color-dark2;
+  border-radius: 30px;
+  transition: all 0.3s ease-in-out;
+  opacity: 0.75;
+
+  &__image {
+    display: block;
+    margin: 0 auto;
+  }
+
+  &__title {
+    text-align: center;
+    margin: 0;
+    text-transform: capitalize;
+    color: $color-placeholder;
+    font-size: 0.875rem; //14px
+  }
+}
+
+.card:hover,
+.card:active {
+  opacity: 1;
+  background-color: $color-primary;
+
+  .card__title {
+    color: $color-dark1;
+  }
+}
