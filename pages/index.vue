@@ -23,18 +23,15 @@ import { mapGetters, mapActions } from 'vuex'
 
 export default {
   name: 'IndexPage',
-  async fetch({ store }) {
-    if (!store.getters['pokemons/pokemons'].length) {
-      await store.dispatch('pokemons/getPokemons')
-    }
-  },
   computed: {
     ...mapGetters({
       pokemons: 'pokemons/pokemons',
       loading: 'pokemons/loading',
     }),
   },
-
+  created() {
+    this.getPokemons()
+  },
   methods: {
     ...mapActions({
       getPokemons: 'pokemons/getPokemons',

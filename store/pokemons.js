@@ -1,5 +1,3 @@
-import wait from '~/helpers/functions/wait'
-
 export const state = () => ({
   pokemons: [],
   defaultPokemons: [],
@@ -46,14 +44,14 @@ export const actions = {
           responses.forEach((response) => {
             tmpPokemons.push(response.data)
           })
-          wait().then(() => {
-            commit('ADD_POKEMONS', tmpPokemons)
-            commit('SET_LOADING', false)
-            resolve()
-          })
+          commit('ADD_POKEMONS', tmpPokemons)
+          resolve()
         })
         .catch((error) => {
           reject(error)
+        })
+        .finally(() => {
+          commit('SET_LOADING', false)
         })
     })
   },
