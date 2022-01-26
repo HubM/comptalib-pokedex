@@ -54,18 +54,10 @@ export const actions = {
     })
   },
   searchPokemon({ commit, state }, search) {
-    // return new Promise((resolve, reject) => {
-    // const filteredPokemons = state.pokemons.filter((pokemon) =>
-    //   pokemon.name.includes(search)
-    // )
-    // console.log('YO', filteredPokemons)
-    commit(
-      'FILTER_POKEMONS',
-      state.pokemons.filter((pokemon) =>
-        new RegExp(search, 'i').test(pokemon.name)
-      )
+    const pokemons = state.pokemons.filter((pokemon) =>
+      new RegExp(search, 'i').test(pokemon.name)
     )
-    // })
+    commit('FILTER_POKEMONS', pokemons)
   },
   restoreDefaultPokemons({ commit }) {
     return new Promise((resolve, reject) => {
