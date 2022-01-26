@@ -1,16 +1,18 @@
 <template>
   <section>
-    <input-search
-      class="margin--bottom--m"
-      placeholder="Search a pokemon"
-      @search="searchPokemon"
-      @restore-default-pokemons="restoreDefaultPokemons"
-    />
-    <flex-container v-if="pokemons && pokemons.length" tag="ul" no-gutter>
-      <flex-item v-for="(pokemon, index) in pokemons" :key="index" xs6 s4 m3>
-        <pokemon-card :pokemon="pokemon" />
-      </flex-item>
-    </flex-container>
+    <div v-if="pokemons.length">
+      <input-search
+        class="margin--bottom--m"
+        placeholder="Search a pokemon"
+        @search="searchPokemon"
+        @restore-default-pokemons="restoreDefaultPokemons"
+      />
+      <flex-container tag="ul" no-gutter>
+        <flex-item v-for="(pokemon, index) in pokemons" :key="index" xs6 s4 m3>
+          <pokemon-card :pokemon="pokemon" />
+        </flex-item>
+      </flex-container>
+    </div>
     <p v-else>No pokemons to catch :(</p>
   </section>
 </template>
