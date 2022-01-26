@@ -1,0 +1,22 @@
+.input {
+  &-search {
+    width: 100%;
+    max-width: 200px;
+    display: block;
+    margin: 0 auto $spc-large auto;
+    padding: 0 0 0.25rem 0; // 4px
+    background: none;
+    border: 0;
+    outline: 0;
+    border-bottom: 1px solid $color-placeholder;
+    color: $color-placeholder;
+    font-size: 0.875rem; // 14px
+
+    @include transitionMixin;
+
+    &--active {
+      color: $color-font;
+      border-bottom: 1px solid $color-font;
+    }
+  }
+}

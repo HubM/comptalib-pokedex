@@ -1,27 +1,3 @@
-// // Extra Extra Small Devices, Phones
-$screen-xxs: 320px;
-
-// // Extra Small Devices, Phones
-$screen-xs: 480px;
-
-// // Small Devices, Tablets
-$screen-sm: 768px;
-
-// // Medium Devices, Desktops
-$screen-m: 992px;
-
-// // Intermediate Devices
-$screen-l: 1200px;
-
-// // small big
-$screen-xl: 1400px;
-
-// // Medium big
-$screen-xxl: 1600px;
-
-// // Large Devices, Wide Screens
-$screen-lg: 1800px;
-
 $breakpoints: (
   's': $screen-sm,
   'm': $screen-m,

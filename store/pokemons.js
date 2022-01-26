@@ -1,22 +1,35 @@
-// const eachSeries = require('async/eachSeries')
-
 export const state = () => ({
   pokemons: [],
+  defaultPokemons: [],
+  loading: false,
 })
 
 export const getters = {
   pokemons: (state) => state.pokemons,
+  loading: (state) => state.loading,
 }
 
 export const mutations = {
   ADD_POKEMONS(state, pokemons) {
     state.pokemons = pokemons
+    state.defaultPokemons = pokemons
+  },
+  FILTER_POKEMONS(state, pokemons) {
+    state.pokemons = pokemons
+  },
+  RESTORE_DEFAULT_POKEMONS(state) {
+    state.pokemons = state.defaultPokemons
+  },
+  SET_LOADING(state, loading) {
+    state.loading = loading
   },
 }
 
 export const actions = {
-  getPokemons({ commit }, payload = { limit: 100 }) {
+  getPokemons({ commit }, payload = { limit: 20 }) {
     return new Promise((resolve, reject) => {
+      commit('SET_LOADING', true)
+
       const { API_URL } = this.app.$config
       const pokemonPromises = []
       const tmpPokemons = []
@@ -37,6 +50,22 @@ export const actions = {
         .catch((error) => {
           reject(error)
         })
+        .finally(() => {
+          commit('SET_LOADING', false)
+        })
+    })
+  },
+  searchPokemon({ commit, state }, search) {
+    return new Promise((resolve, reject) => {
+      const filteredPokemons = state.pokemons.filter((pokemon) =>
+        pokemon.name.includes(search)
+      )
+      commit('FILTER_POKEMONS', filteredPokemons)
+    })
+  },
+  restoreDefaultPokemons({ commit }) {
+    return new Promise((resolve, reject) => {
+      commit('RESTORE_DEFAULT_POKEMONS')
     })
   },
 }

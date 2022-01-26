@@ -1,19 +1,15 @@
 body {
   background-color: $color-dark1;
   font-family: $font-family;
+  font-weight: 400;
   color: $color-font;
+  caret-color: $color-primary;
 }
 
-header {
-  padding: $spc-x-small;
-  background-color: $color-dark2;
-}
-
-.baseline {
-  text-align: right;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
+::placeholder {
+  color: $color-placeholder;
+  font-size: 0.75rem; // 12px
+  font-weight: 300;
 }
 
 footer {

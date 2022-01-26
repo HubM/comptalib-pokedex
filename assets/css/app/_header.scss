@@ -1,0 +1,29 @@
+@keyframes hoverBaseline {
+  from {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
+  to {
+    opacity: 0.7;
+  }
+}
+
+header {
+  padding: $spc-x-small;
+  background-color: $color-dark2;
+}
+
+.baseline {
+  text-align: right;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: $color-font;
+  opacity: 0.7;
+
+  &:hover {
+    animation: hoverBaseline $animation-duration $timing-function infinite;
+  }
+}

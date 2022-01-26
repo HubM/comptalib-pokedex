@@ -1,3 +1,13 @@
+/////// BREAKPOINTS ///////
+$screen-xxs: 320px;
+$screen-xs: 480px;
+$screen-sm: 768px;
+$screen-m: 992px;
+$screen-l: 1200px;
+$screen-xl: 1400px;
+$screen-xxl: 1600px;
+$screen-lg: 1800px;
+
 /////// SPACING ///////
 $spc-tiny: 0.5rem; //8px
 $spc-x-small: 1rem; //16px
@@ -22,3 +32,21 @@ $color-font: #fff;
 $color-primary: #ffa801;
 $font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
   'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+
+/////// TRANSITIONS | ANIMATIONS ///////
+$transition-duration: 0.3s;
+$animation-duration: 1s;
+$timing-function: ease-in-out;
+
+@mixin transitionMixin($prop: all, $duration: 0.3s) {
+  transition: $prop $duration $timing-function;
+}
+
+@mixin animationMixin(
+  $name,
+  $duration: $animation-duration,
+  $timing: $timing-function,
+  $repeat: infinite
+) {
+  animation: $name $duration $timing $repeat;
+}
