@@ -7,7 +7,7 @@
   background: $color-dark2;
   border-radius: 30px;
   opacity: 0.75;
-  @include animated;
+  @include transitionMixin;
 
   &__image {
     display: block;

@@ -1,5 +1,7 @@
 .input {
   &-search {
+    width: 100%;
+    max-width: 200px;
     display: block;
     margin: 0 auto $spc-large auto;
     padding: 0 0 0.25rem 0; // 4px
@@ -10,7 +12,7 @@
     color: $color-placeholder;
     font-size: 0.875rem; // 14px
 
-    @include animated;
+    @include transitionMixin;
 
     &--active {
       color: $color-font;
