@@ -39,4 +39,9 @@ export const actions = {
         })
     })
   },
+  searchPokemon({ commit }, payload) {
+    return new Promise((resolve, reject) => {
+      console.log('I GOT', payload)
+    })
+  },
 }

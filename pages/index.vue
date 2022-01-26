@@ -1,5 +1,12 @@
 <template>
   <section>
+    <!-- <flex-item xs12> -->
+    <input-search
+      class="margin--bottom--m"
+      placeholder="Search a pokemon"
+      @search="searchPokemon"
+    />
+    <!-- </flex-item> -->
     <flex-container v-if="pokemons && pokemons.length" tag="ul" no-gutter>
       <flex-item v-for="(pokemon, index) in pokemons" :key="index" xs6 s4 m3>
         <pokemon-card :pokemon="pokemon" />
@@ -28,6 +35,7 @@ export default {
   methods: {
     ...mapActions({
       getPokemons: 'pokemons/getPokemons',
+      searchPokemon: 'pokemons/searchPokemon',
     }),
   },
 }

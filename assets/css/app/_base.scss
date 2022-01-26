@@ -1,7 +1,15 @@
 body {
   background-color: $color-dark1;
   font-family: $font-family;
+  font-weight: 400;
   color: $color-font;
+  caret-color: $color-primary;
+}
+
+::placeholder {
+  color: $color-placeholder;
+  font-size: 0.75rem; // 12px
+  font-weight: 300;
 }
 
 header {

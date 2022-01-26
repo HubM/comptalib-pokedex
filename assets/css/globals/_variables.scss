@@ -22,3 +22,11 @@ $color-font: #fff;
 $color-primary: #ffa801;
 $font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
   'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+
+/////// TRANSITIONS ///////
+$transition-duration: 0.3s;
+$timing-function: ease-in-out;
+
+@mixin animated($prop: all, $duration: 0.3s) {
+  transition: $prop $duration $timing-function;
+}

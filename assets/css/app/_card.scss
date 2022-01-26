@@ -6,8 +6,8 @@
   padding: $spc-x-small;
   background: $color-dark2;
   border-radius: 30px;
-  transition: all 0.3s ease-in-out;
   opacity: 0.75;
+  @include animated;
 
   &__image {
     display: block;
