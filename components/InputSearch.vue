@@ -26,6 +26,7 @@ export default {
   data() {
     return {
       search: '',
+      debounce: null,
     }
   },
   computed: {
@@ -42,14 +43,16 @@ export default {
   },
   methods: {
     onInput() {
-      this.$emit('restore-default-pokemons')
+      clearTimeout(this.debounce)
+      this.debounce = setTimeout(() => {
+        if (!this.search.length || !this.active) {
+          this.$emit('restore-default-pokemons')
+          return
+        }
 
-      if (!this.active) {
-        return
-      }
-
-      const formattedSearch = this.search.trim().toLowerCase()
-      this.$emit('search', formattedSearch)
+        const formattedSearch = this.search.trim().toLowerCase()
+        this.$emit('search', formattedSearch)
+      }, 500)
     },
   },
 }

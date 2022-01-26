@@ -1,5 +1,5 @@
 export default {
-  ssr: false,
+  mode: 'client',
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'comptalib-pokedex',
