@@ -1,6 +1,7 @@
 export default function (pokemon) {
-  const { name, sprites } = pokemon
+  const { id, name, sprites } = pokemon
   return {
+    id,
     name,
     sprite: sprites.front_default,
   }

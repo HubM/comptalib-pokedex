@@ -1,3 +1,5 @@
+import formatPokemon from '~/helpers/functions/formatPokemon'
+
 export const state = () => ({
   pokemons: [],
   defaultPokemons: [],
@@ -26,13 +28,12 @@ export const mutations = {
 }
 
 export const actions = {
-  getPokemons({ commit }, payload = { limit: 20 }) {
+  getPokemons({ commit, state }, payload = { limit: 20 }) {
     return new Promise((resolve, reject) => {
       commit('SET_LOADING', true)
 
       const { API_URL } = this.app.$config
       const pokemonPromises = []
-      const tmpPokemons = []
 
       for (let i = 1; i <= payload.limit; i++) {
         const url = `${API_URL}/pokemon/${i}`
@@ -41,17 +42,15 @@ export const actions = {
 
       Promise.all(pokemonPromises)
         .then((responses) => {
-          responses.forEach((response) => {
-            tmpPokemons.push(response.data)
-          })
-          commit('ADD_POKEMONS', tmpPokemons)
-          resolve()
-        })
-        .catch((error) => {
-          reject(error)
+          const pokemons = responses.map((response) =>
+            formatPokemon(response.data)
+          )
+          commit('ADD_POKEMONS', pokemons)
+          console.log('OUPS', state.pokemons)
         })
         .finally(() => {
           commit('SET_LOADING', false)
+          resolve()
         })
     })
   },
