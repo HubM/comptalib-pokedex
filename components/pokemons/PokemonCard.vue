@@ -1,6 +1,7 @@
 <template>
   <nuxt-link :to="`/pokemon/${pokemon.id}`" class="card">
     <nuxt-img
+      format="webp"
       preload
       :src="pokemon.sprite"
       :alt="`default picture of ${pokemon.name} pokemon`"

@@ -28,7 +28,7 @@ export const mutations = {
 }
 
 export const actions = {
-  getPokemons({ commit, state }, payload = { limit: 20 }) {
+  getPokemons({ commit, state }, payload = { limit: 100 }) {
     return new Promise((resolve, reject) => {
       commit('SET_LOADING', true)
 
