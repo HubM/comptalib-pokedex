@@ -8,7 +8,10 @@
           >
         </flex-item>
         <flex-item v-if="!team.length" xs6 tag="li">
-          <button class="header__button" @click="$emit('toggle-team-modal')">
+          <button
+            class="button header__button"
+            @click="$emit('toggle-team-modal')"
+          >
             <nuxt-img
               v-if="showTeam"
               src="/cross.svg"

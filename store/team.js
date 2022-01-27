@@ -1,3 +1,5 @@
+import { getTeam, setTeam } from '~/helpers/functions/localForage'
+
 export const state = () => ({
   team: [],
 })
@@ -15,11 +17,38 @@ export const mutations = {
 export const actions = {
   setTeamIfExist({ commit }, { localForage }) {
     return new Promise((resolve, reject) => {
-      localForage.getItem('team').then((teamStored) => {
-        if (teamStored) {
-          commit('SET_TEAM', JSON.parse(teamStored))
-        }
-      })
+      getTeam(localForage)
+        .then((team) => {
+          if (team) {
+            commit('SET_TEAM', team)
+            resolve()
+          }
+        })
+        .catch((error) => {
+          reject(error)
+        })
+    })
+  },
+  addPokemon(context, { localForage, pokemon }) {
+    return new Promise((resolve, reject) => {
+      getTeam(localForage)
+        .then((team) => {
+          let teamToAdd = [pokemon]
+
+          if (team) {
+            team.push(pokemon)
+            teamToAdd = team
+          }
+
+          setTeam(localForage, teamToAdd)
+            .then(() => resolve())
+            .catch((error) => {
+              reject(error)
+            })
+        })
+        .catch((error) => {
+          reject(error)
+        })
     })
   },
 }

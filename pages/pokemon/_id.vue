@@ -7,6 +7,9 @@
       <h1 v-if="pokemon.name" class="pokemon__details__name">
         {{ pokemon.name }}
       </h1>
+      <button class="button button--primary" @click.once="onAddPokemon">
+        Add to my team &#x1F918;
+      </button>
       <div class="pokemon__details__informations">
         <h2 class="pokemon__details__informations__title">Characteristics</h2>
         <ul>
@@ -19,6 +22,8 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 export default {
   async asyncData({ params, store }) {
     const { id } = params
@@ -50,6 +55,25 @@ export default {
     pokemonWeight() {
       if (!this.pokemon.weight) return null
       return `${this.pokemon.weight / 10} kg`
+    },
+  },
+  methods: {
+    ...mapActions({
+      addPokemon: 'team/addPokemon',
+    }),
+    onAddPokemon() {
+      this.addPokemon({
+        localForage: this.$localForage,
+        pokemon: this.pokemon,
+      })
+        .then(() => {
+          alert('Pokemon added to your team !')
+        })
+        .catch(() => {
+          alert(
+            'An error occured while adding the pokemon to your team, please try again later.'
+          )
+        })
     },
   },
 }
