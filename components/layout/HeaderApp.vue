@@ -10,10 +10,18 @@
         <flex-item v-if="!team.length" xs6 tag="li">
           <button class="header__button" @click="$emit('toggle-team-modal')">
             <nuxt-img
+              v-if="showTeam"
+              src="/cross.svg"
+              alt="Icon to close the modal"
+              width="30"
+              height="30"
+            />
+            <nuxt-img
+              v-else
               src="/pokeball.svg"
               alt="The application logo, a pokeball"
-              width="50"
-              height="50"
+              width="40"
+              height="40"
             />
           </button>
         </flex-item>

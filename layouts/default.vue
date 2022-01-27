@@ -1,6 +1,10 @@
 <template>
   <div>
-    <header-app :team="team" @toggle-team-modal="toggleTeamModal" />
+    <header-app
+      :team="team"
+      :show-team="showTeam"
+      @toggle-team-modal="toggleTeamModal"
+    />
     <main class="main-container">
       <nuxt />
     </main>
