@@ -60,4 +60,14 @@ export const actions = {
       commit('RESTORE_DEFAULT_POKEMONS')
     })
   },
+  getPokemon({ commit, state }, id) {
+    return new Promise((resolve, reject) => {
+      const { API_URL } = this.app.$config
+      const url = `${API_URL}/pokemon/${id}`
+
+      this.$axios
+        .get(url)
+        .then(({ data }) => resolve(formatPokemonDetails(data)))
+    })
+  },
 }

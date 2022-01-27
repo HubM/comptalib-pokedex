@@ -8,7 +8,14 @@
         @restore-default-pokemons="restoreDefaultPokemons"
       />
       <flex-container tag="ul" no-gutter>
-        <flex-item v-for="(pokemon, index) in pokemons" :key="index" xs6 s4 m3>
+        <flex-item
+          v-for="(pokemon, index) in pokemons"
+          :key="index"
+          xs6
+          s4
+          m3
+          l2
+        >
           <pokemon-card :pokemon="pokemon" />
         </flex-item>
       </flex-container>
