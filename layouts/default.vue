@@ -1,29 +1,48 @@
 <template>
   <div>
-    <header-app @toggle-team-modal="toggleTeamModal" />
+    <header-app :team="team" @toggle-team-modal="toggleTeamModal" />
     <main class="main-container">
       <nuxt />
     </main>
     <footer-app />
+    <modal-team v-if="showTeam" :team="team" />
   </div>
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   name: 'LayoutDefault',
+  data() {
+    return {
+      showTeam: false,
+    }
+  },
+  head() {
+    return {
+      bodyAttrs: {
+        class: this.showTeam ? 'body modal-open' : 'body',
+      },
+    }
+  },
+  computed: {
+    ...mapGetters({
+      team: 'team/team',
+    }),
+  },
   mounted() {
     this.setTeamIfExist({
       localForage: this.$localForage,
     })
   },
+
   methods: {
     ...mapActions({
       setTeamIfExist: 'team/setTeamIfExist',
     }),
     toggleTeamModal() {
-      console.log('YOOOOOOO')
+      this.showTeam = !this.showTeam
     },
   },
 }

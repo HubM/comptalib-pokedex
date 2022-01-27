@@ -3,7 +3,9 @@
     <nav>
       <flex-container no-gutter tag="ul" class="middle-xs">
         <flex-item xs6 tag="li">
-          <nuxt-link to="/" class="header__baseline">Catch them all</nuxt-link>
+          <nuxt-link to="/" class="header__baseline"
+            >Catch them all &#x270C;</nuxt-link
+          >
         </flex-item>
         <flex-item v-if="!team.length" xs6 tag="li">
           <button class="header__button" @click="$emit('toggle-team-modal')">
@@ -21,13 +23,17 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 export default {
   name: 'HeaderApp',
-  computed: {
-    ...mapGetters({
-      team: 'team/team',
-    }),
+  props: {
+    showTeam: {
+      type: Boolean,
+      default: false,
+    },
+    team: {
+      type: Array,
+      default: () => [],
+    },
   },
 }
 </script>

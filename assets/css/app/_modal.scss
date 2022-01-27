@@ -1,0 +1,14 @@
+.modal {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 75px;
+  background-color: $color-light-1;
+  color: $color-dark-1;
+  padding: 2rem;
+  box-sizing: border-box;
+
+  h1 {
+    color: $color-dark-2;
+  }
+}

@@ -3,11 +3,13 @@
   max-width: 150px;
   display: block;
   margin: 0 auto $spc-x-small auto;
-  padding: $spc-x-small;
-  background: $color-dark2;
+  padding: $spc-tiny;
   border-radius: 30px;
   opacity: 0.75;
-  @include transitionMixin;
+
+  &:active {
+    color: $color-primary;
+  }
 
   &__image {
     display: block;
@@ -21,14 +23,23 @@
     color: $color-placeholder;
     font-size: 0.875rem; //14px
   }
-}
 
-.card:hover,
-.card:active {
-  opacity: 1;
-  background-color: $color-primary;
+  @media screen and (min-width: $screen-xs) {
+    background: $color-dark-2;
+    @include transitionMixin;
 
-  .card__title {
-    color: $color-dark1;
+    &:hover,
+    &:active {
+      opacity: 1;
+      background-color: $color-primary;
+
+      .card__title {
+        color: $color-dark-1;
+      }
+    }
+  }
+
+  @media screen and (min-width: $screen-sm) {
+    padding: $spc-x-small;
   }
 }

@@ -20,7 +20,7 @@
         </flex-item>
       </flex-container>
     </div>
-    <p v-else>No pokemons to catch :(</p>
+    <p v-else>No pokemons to catch &#x1F62B;</p>
   </section>
 </template>
 

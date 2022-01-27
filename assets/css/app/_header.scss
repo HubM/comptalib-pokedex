@@ -26,7 +26,7 @@
 
 .header {
   padding: 10 px $spc-x-small;
-  background-color: $color-dark2;
+  background-color: $color-dark-2;
   padding: 10px 1rem;
   height: 55px;
 
@@ -40,13 +40,13 @@
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 1.5px;
-    color: $color-font;
+    color: $color-light-1;
     opacity: 0.7;
     transform: rotate(0deg);
-    @include transitionMixin(transform, 1s);
 
-    &:hover {
-      transform: rotate(360deg);
+    &:hover,
+    &:active {
+      animation: hoverBaseline $animation-duration $timing-function infinite;
     }
   }
 
@@ -59,7 +59,8 @@
     transform-origin: 50% 50%;
     cursor: pointer;
 
-    &:hover {
+    &:hover,
+    &:active {
       animation: hoverButton $animation-duration $timing-function infinite;
     }
   }
