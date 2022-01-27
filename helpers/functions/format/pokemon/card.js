@@ -3,6 +3,6 @@ export default function (pokemon) {
   return {
     id,
     name,
-    sprite: sprites.default.front,
+    sprite: sprites.default,
   }
 }

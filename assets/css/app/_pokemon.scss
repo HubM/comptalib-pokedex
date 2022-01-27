@@ -1,0 +1,47 @@
+.pokemon {
+  &__sprites {
+    order: 1;
+
+    &__main {
+      min-height: 300px;
+    }
+
+    @media screen and (min-width: $screen-sm) {
+      order: 0;
+    }
+  }
+
+  &__details {
+    order: 0;
+    box-sizing: border-box;
+    padding-left: 0 !important;
+    text-align: left;
+
+    &__name {
+      text-transform: capitalize;
+      text-align: center;
+    }
+
+    &__informations {
+      margin: $spc-medium 0;
+      text-align: center;
+      &__title {
+        font-size: 1rem;
+      }
+    }
+
+    @media screen and (min-width: $screen-sm) {
+      order: 1;
+      padding-left: $spc-large !important;
+
+      &__name {
+        text-align: left;
+      }
+
+      &__informations {
+        margin: $spc-large 0;
+        text-align: left;
+      }
+    }
+  }
+}
