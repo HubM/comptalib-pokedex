@@ -20,7 +20,7 @@
         </flex-item>
       </flex-container>
     </div>
-    <p v-else>No pokemons to catch :(</p>
+    <p v-else>No pokemons to catch &#x1F62B;</p>
   </section>
 </template>
 
@@ -29,7 +29,7 @@ import { mapGetters, mapActions } from 'vuex'
 
 export default {
   name: 'IndexPage',
-  async fetch({ store }) {
+  async fetch({ store, $localForage }) {
     await store.dispatch('pokemons/getPokemons')
   },
   computed: {
@@ -38,6 +38,14 @@ export default {
       loading: 'pokemons/loading',
     }),
   },
+  // created() {
+
+  //   // this.$localForage.
+  //   // const myTeamLength = await $localForage.length
+
+  //   // console.log('myTeamLength', myTeamLength)
+  //   // await store.dispatch('team/getTeam')
+  // },
 
   methods: {
     ...mapActions({

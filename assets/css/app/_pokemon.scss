@@ -35,6 +35,10 @@
       }
     }
 
+    .button {
+      margin: 0 auto;
+    }
+
     @media screen and (min-width: $screen-sm) {
       order: 1;
       padding-left: $spc-large !important;
@@ -46,6 +50,9 @@
       &__informations {
         margin: $spc-large 0;
         text-align: left;
+      }
+      .button {
+        margin: 0;
       }
     }
   }

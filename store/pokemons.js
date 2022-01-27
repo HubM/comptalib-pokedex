@@ -31,6 +31,11 @@ export const mutations = {
 export const actions = {
   getPokemons({ commit, state }, payload = { limit: 100 }) {
     return new Promise((resolve, reject) => {
+      if (state.pokemons.length) {
+        resolve()
+        return
+      }
+
       const { API_URL } = this.app.$config
       const pokemonPromises = []
 

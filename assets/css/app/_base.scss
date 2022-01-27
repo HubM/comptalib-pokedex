@@ -1,16 +1,50 @@
 html {
-  background-color: $color-dark1;
+  background-color: $color-dark-1;
   caret-color: $color-primary;
 }
 
-body {
+.body {
   @include fontBodyMixin;
+
+  &.modal-open {
+    overflow: hidden;
+
+    .header {
+      background-color: $color-primary;
+
+      &__baseline {
+        color: $color-dark-1;
+        pointer-events: none;
+
+        &:hover,
+        &:active {
+          animation: none;
+        }
+      }
+    }
+  }
 }
 
 ::placeholder {
   color: $color-placeholder;
   font-size: 0.75rem; // 12px
   font-weight: 300;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background-color: $color-dark-1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background-color: $color-primary;
+  border-radius: 10px;
 }
 
 footer {
@@ -83,4 +117,8 @@ h2 {
 .page-enter,
 .page-leave-to {
   opacity: 0;
+}
+
+.disabled {
+  pointer-events: none;
 }

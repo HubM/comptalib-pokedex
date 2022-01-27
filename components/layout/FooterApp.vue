@@ -1,5 +1,5 @@
 <template functional>
   <footer>
-    <p>Made with love by <a href="https://github.com/HubM">Hub</a></p>
+    <p>Made with &#x1F498;</p>
   </footer>
 </template>
