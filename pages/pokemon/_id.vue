@@ -47,6 +47,11 @@ export default {
       pokemon,
     }
   },
+  head() {
+    return {
+      title: `${this.pokemon.name.toUpperCase()}`,
+    }
+  },
   computed: {
     pokemonHeight() {
       if (!this.pokemon.height) return null
