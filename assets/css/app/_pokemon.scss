@@ -6,6 +6,11 @@
       min-height: 300px;
     }
 
+    &__versions__title {
+      text-align: center;
+      margin: $spc-medium 0 $spc-x-small 0;
+    }
+
     @media screen and (min-width: $screen-sm) {
       order: 0;
     }

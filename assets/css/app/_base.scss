@@ -32,6 +32,10 @@ h1 {
   letter-spacing: 1px;
 }
 
+h2 {
+  font-size: $font-m;
+}
+
 #__layout {
   position: relative;
   min-height: 100vh;
@@ -49,13 +53,17 @@ h1 {
   }
 }
 
-.center-block {
+.block-center {
   display: block;
   margin: 0 auto;
 }
 
-.center-text {
+.text-center {
   text-align: center;
+}
+
+.text-italic {
+  font-style: italic;
 }
 
 .margin-null {
@@ -65,4 +73,14 @@ h1 {
 .position-relative {
   position: relative;
   min-height: 100vh;
+}
+
+.page-enter-active,
+.page-leave-active {
+  @include transitionMixin(opacity, 1s);
+}
+
+.page-enter,
+.page-leave-to {
+  opacity: 0;
 }

@@ -1,23 +1,18 @@
 <template>
   <flex-container no-gutter>
     <flex-item xs12 class="pokemon__sprites__main">
-      <nuxt-img
-        :src="imgSrc"
-        :alt="`default picture of pokemon`"
-        width="300"
-        class="center-block"
-      />
+      <nuxt-img :src="imgSrc" width="300" class="block-center" />
     </flex-item>
-    <flex-item v-if="sprites.versions" xs12>
+    <flex-item v-if="sprites.versions" xs12 class="pokemon_sprites__versions">
       <div class="">
-        <h2 class="center-text margin-null">Versions</h2>
+        <h2 class="pokemon__sprites__versions__title">Versions</h2>
         <flex-container tag="ul" class="center-xs" no-gutter>
           <flex-item
             v-for="(version, index) in sprites.versions"
             :key="`${version.name}-${index}`"
             tag="li"
           >
-            <p>{{ version.name }}</p>
+            <p class="text-italic">{{ version.name }}</p>
             <div @click="setImg(version.sprite)">
               <nuxt-img
                 format="webp"
