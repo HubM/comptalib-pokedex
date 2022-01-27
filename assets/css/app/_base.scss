@@ -118,3 +118,7 @@ h2 {
 .page-leave-to {
   opacity: 0;
 }
+
+.disabled {
+  pointer-events: none;
+}

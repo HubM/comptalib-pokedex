@@ -3,7 +3,7 @@
     <nav>
       <flex-container no-gutter tag="ul" class="middle-xs">
         <flex-item xs6 tag="li">
-          <nuxt-link to="/" class="header__baseline"
+          <nuxt-link to="/" class="header__baseline" :class="baselineClass"
             >Catch them all &#x270C;</nuxt-link
           >
         </flex-item>
@@ -41,6 +41,11 @@ export default {
     team: {
       type: Array,
       default: () => [],
+    },
+  },
+  computed: {
+    baselineClass() {
+      return this.$route.name === 'index' ? 'disabled' : ''
     },
   },
 }
