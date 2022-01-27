@@ -32,21 +32,17 @@ export default {
   async fetch({ store, $localForage }) {
     await store.dispatch('pokemons/getPokemons')
   },
+  head() {
+    return {
+      title: 'Catch them all !',
+    }
+  },
   computed: {
     ...mapGetters({
       pokemons: 'pokemons/pokemons',
       loading: 'pokemons/loading',
     }),
   },
-  // created() {
-
-  //   // this.$localForage.
-  //   // const myTeamLength = await $localForage.length
-
-  //   // console.log('myTeamLength', myTeamLength)
-  //   // await store.dispatch('team/getTeam')
-  // },
-
   methods: {
     ...mapActions({
       getPokemons: 'pokemons/getPokemons',
