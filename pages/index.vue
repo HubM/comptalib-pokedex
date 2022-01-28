@@ -1,7 +1,13 @@
 <template>
   <section>
-    <div>
+    <div v-if="$fetchState.error" class="error-section">
+      <h1>Pokemons not found &#x1F62B;</h1>
+      <p>An error occured while getting Pokemons, please try again later.</p>
+    </div>
+    <p v-else-if="$fetchState.pending">Loading pokemons...</p>
+    <div v-else>
       <input-search
+        v-if="pokemons.length"
         class="margin--bottom--m"
         placeholder="Search a pokemon"
         @search="searchPokemon"
@@ -17,8 +23,8 @@ import { mapGetters, mapActions } from 'vuex'
 
 export default {
   name: 'IndexPage',
-  async fetch({ store, $localForage }) {
-    await store.dispatch('pokemons/getPokemons')
+  async fetch() {
+    await this.$store.dispatch('pokemons/getPokemons')
   },
   head() {
     return {
