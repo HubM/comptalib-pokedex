@@ -6,6 +6,8 @@
         :pokemons="team"
         empty-message="No pokemons in my team"
         mode="light"
+        with-delete
+        @delete="(index) => $emit('delete', index)"
       />
     </div>
   </div>

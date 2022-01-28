@@ -53,4 +53,17 @@ export const actions = {
         })
     })
   },
+  deletePokemon({ state, dispatch }, { localForage, index }) {
+    return new Promise((resolve, reject) => {
+      const newTeam = [...state.team].filter((pokemon, i) => i !== index)
+
+      setTeam(localForage, newTeam)
+        .then(() =>
+          dispatch('setTeamIfExist', localForage).then(() => resolve())
+        )
+        .catch((error) => {
+          reject(error)
+        })
+    })
+  },
 }

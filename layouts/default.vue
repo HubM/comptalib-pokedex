@@ -9,7 +9,7 @@
       <nuxt />
     </main>
     <footer-app />
-    <modal-team v-if="showTeam" :team="team" />
+    <modal-team v-if="showTeam" :team="team" @delete="onDeletePokemon" />
   </div>
 </template>
 
@@ -42,9 +42,24 @@ export default {
   methods: {
     ...mapActions({
       setTeamIfExist: 'team/setTeamIfExist',
+      deletePokemon: 'team/deletePokemon',
     }),
     toggleTeamModal() {
       this.showTeam = !this.showTeam
+    },
+    onDeletePokemon(index) {
+      this.deletePokemon({
+        localForage: this.$localForage,
+        index,
+      })
+        .then(() => {
+          alert('Pokemon deleted from your team !')
+        })
+        .catch(() => {
+          alert(
+            "Pokemon couldn't be deleted from your team, please try again later"
+          )
+        })
     },
   },
 }

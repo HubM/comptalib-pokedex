@@ -7,10 +7,17 @@
       no-gutter
     >
       <flex-item v-for="(pokemon, index) in pokemons" :key="index" xs6 s4 m3 l2>
-        <pokemon-card :pokemon="pokemon" :mode="mode" />
+        <pokemon-card
+          :pokemon="pokemon"
+          :mode="mode"
+          :with-delete="withDelete"
+          @delete="$emit('delete', index)"
+        />
       </flex-item>
     </flex-container>
-    <p v-else>{{ emptyMessage }} &#x1F62B;</p>
+    <p v-else class="text-center">
+      <span class="text-italic">{{ emptyMessage }}</span> &#x1F62B;
+    </p>
   </div>
 </template>
 
@@ -29,6 +36,10 @@ export default {
     mode: {
       type: String,
       default: 'dark',
+    },
+    withDelete: {
+      type: Boolean,
+      default: false,
     },
   },
 }

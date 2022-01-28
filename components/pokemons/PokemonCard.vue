@@ -8,6 +8,13 @@
       class="card__image"
     />
     <p class="card__title">{{ pokemon.name }}</p>
+    <button
+      v-if="withDelete"
+      class="button button--secondary"
+      @click="$emit('delete')"
+    >
+      Delete
+    </button>
   </nuxt-link>
 </template>
 
@@ -22,6 +29,10 @@ export default {
     mode: {
       type: String,
       required: true,
+    },
+    withDelete: {
+      type: Boolean,
+      default: false,
     },
   },
   computed: {
