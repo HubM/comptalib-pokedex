@@ -87,28 +87,6 @@ h2 {
   }
 }
 
-.block-center {
-  display: block;
-  margin: 0 auto;
-}
-
-.text-center {
-  text-align: center;
-}
-
-.text-italic {
-  font-style: italic;
-}
-
-.margin-null {
-  margin: 0;
-}
-
-.position-relative {
-  position: relative;
-  // min-height: 100vh;
-}
-
 .page-enter-active,
 .page-leave-active {
   @include transitionMixin(opacity, 1s);
@@ -117,8 +95,4 @@ h2 {
 .page-enter,
 .page-leave-to {
   opacity: 0;
-}
-
-.disabled {
-  pointer-events: none;
 }
