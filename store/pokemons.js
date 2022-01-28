@@ -1,5 +1,8 @@
-import formatPokemonDetails from '~/helpers/functions/format/pokemon/details'
-import formatPokemonCard from '~/helpers/functions/format/pokemon/card'
+import {
+  formatPokemonCard,
+  formatPokemonDetails,
+  formatPokemonAbilities,
+} from '~/helpers/functions/format/pokemon'
 
 export const state = () => ({
   pokemons: [],
@@ -73,6 +76,18 @@ export const actions = {
       this.$axios
         .get(url)
         .then(({ data }) => resolve(formatPokemonDetails(data)))
+    })
+  },
+  getPokemonAbilities({ commit, state }, abilities) {
+    return new Promise((resolve, reject) => {
+      const promises = abilities.map(({ url }) => this.$axios.get(url))
+
+      Promise.all(promises).then((responses) => {
+        const abilities = responses.map(({ data }) =>
+          formatPokemonAbilities(data)
+        )
+        resolve(abilities)
+      })
     })
   },
 }

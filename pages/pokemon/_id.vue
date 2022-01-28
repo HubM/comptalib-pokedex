@@ -16,6 +16,21 @@
           <li v-if="pokemonHeight">Height : {{ pokemonHeight }}</li>
           <li v-if="pokemonWeight">Weight : {{ pokemonWeight }}</li>
         </ul>
+        <h2
+          v-if="pokemon.abilities"
+          class="pokemon__details__informations__title"
+        >
+          abilities
+        </h2>
+        <ul>
+          <li
+            v-for="({ name, effect }, index) in pokemon.abilities"
+            :key="`${name}-${index}`"
+          >
+            <h3 v-if="name">{{ name }}</h3>
+            <p v-if="effect">{{ effect }}</p>
+          </li>
+        </ul>
       </div>
     </flex-item>
   </flex-container>
@@ -23,12 +38,13 @@
 
 <script>
 import { mapActions } from 'vuex'
-import formatPokemonCard from '~/helpers/functions/format/pokemon/card'
+import { formatPokemonCard } from '~/helpers/functions/format/pokemon'
 
 export default {
   async asyncData({ params, store }) {
     const { id } = params
     let pokemon = null
+    let abilities = null
 
     if (!store.state.pokemons.defaultPokemons.length) {
       pokemon = await store.dispatch('pokemons/getPokemon', id)
@@ -44,8 +60,18 @@ export default {
       }
     }
 
+    if (pokemon.abilities.length) {
+      abilities = await store.dispatch(
+        'pokemons/getPokemonAbilities',
+        pokemon.abilities
+      )
+    }
+
     return {
-      pokemon,
+      pokemon: {
+        ...pokemon,
+        abilities,
+      },
     }
   },
   head() {
