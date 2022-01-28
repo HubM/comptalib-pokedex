@@ -54,6 +54,9 @@ export default {
       })
         .then(() => {
           alert('Pokemon deleted from your team !')
+          if (!this.team.length) {
+            this.showTeam = false
+          }
         })
         .catch(() => {
           alert(

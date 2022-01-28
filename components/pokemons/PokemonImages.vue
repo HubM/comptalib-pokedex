@@ -19,6 +19,7 @@
                 width="70"
                 :src="version.sprite"
                 :alt="`default picture of pokemon in ${version.name} version`"
+                class="cursor-pointer"
               />
             </div>
           </flex-item>
