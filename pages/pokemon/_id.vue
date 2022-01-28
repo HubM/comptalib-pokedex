@@ -7,7 +7,7 @@
       <h1 v-if="pokemon.name" class="pokemon__details__name">
         {{ pokemon.name }}
       </h1>
-      <button class="button button--primary" @click.once="onAddPokemon">
+      <button class="button button--primary" @click="onAddPokemon">
         Add to my team &#x1F918;
       </button>
       <div class="pokemon__details__informations">
@@ -23,6 +23,7 @@
 
 <script>
 import { mapActions } from 'vuex'
+import formatPokemonCard from '~/helpers/functions/format/pokemon/card'
 
 export default {
   async asyncData({ params, store }) {
@@ -69,7 +70,7 @@ export default {
     onAddPokemon() {
       this.addPokemon({
         localForage: this.$localForage,
-        pokemon: this.pokemon,
+        pokemon: formatPokemonCard(this.pokemon),
       })
         .then(() => {
           alert('Pokemon added to your team !')

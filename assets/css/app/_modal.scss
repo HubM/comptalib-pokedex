@@ -7,8 +7,20 @@
   color: $color-dark-1;
   padding: 2rem;
   box-sizing: border-box;
+  overflow-y: scroll;
 
   h1 {
     color: $color-dark-2;
+    margin-bottom: 50px;
+    text-align: center;
+  }
+
+  .pokemon-list {
+    margin-bottom: 100px;
+
+    button {
+      padding: 5px 10px;
+      margin: 3px auto 0 auto;
+    }
   }
 }

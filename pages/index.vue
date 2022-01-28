@@ -1,26 +1,14 @@
 <template>
   <section>
-    <div v-if="pokemons.length">
+    <div>
       <input-search
         class="margin--bottom--m"
         placeholder="Search a pokemon"
         @search="searchPokemon"
         @restore-default-pokemons="restoreDefaultPokemons"
       />
-      <flex-container tag="ul" no-gutter>
-        <flex-item
-          v-for="(pokemon, index) in pokemons"
-          :key="index"
-          xs6
-          s4
-          m3
-          l2
-        >
-          <pokemon-card :pokemon="pokemon" />
-        </flex-item>
-      </flex-container>
+      <pokemon-list :pokemons="pokemons" />
     </div>
-    <p v-else>No pokemons to catch &#x1F62B;</p>
   </section>
 </template>
 

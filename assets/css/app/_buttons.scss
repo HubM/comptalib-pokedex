@@ -7,18 +7,29 @@
   font-weight: 600;
   text-transform: uppercase;
   cursor: pointer;
+  padding: 10px;
+  border-radius: 20px;
   @include transitionMixin;
 
   &--primary {
     color: $color-primary;
     border: 1px solid $color-primary;
-    padding: 10px;
-    border-radius: 20px;
 
     &:hover,
     &:active {
       color: $color-dark-1;
       background: $color-primary;
+    }
+  }
+
+  &--secondary {
+    color: $color-warning;
+    border: 1px solid $color-warning;
+
+    &:hover,
+    &:active {
+      color: $color-light-1;
+      background: $color-warning;
     }
   }
 }
