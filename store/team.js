@@ -15,7 +15,7 @@ export const mutations = {
 }
 
 export const actions = {
-  setTeamIfExist({ commit }, { localForage }) {
+  setTeamIfExist({ commit }, localForage) {
     return new Promise((resolve, reject) => {
       getTeam(localForage)
         .then((team) => {
@@ -29,7 +29,7 @@ export const actions = {
         })
     })
   },
-  addPokemon(context, { localForage, pokemon }) {
+  addPokemon({ dispatch }, { localForage, pokemon }) {
     return new Promise((resolve, reject) => {
       getTeam(localForage)
         .then((team) => {
@@ -41,7 +41,9 @@ export const actions = {
           }
 
           setTeam(localForage, teamToAdd)
-            .then(() => resolve())
+            .then(() =>
+              dispatch('setTeamIfExist', localForage).then(() => resolve())
+            )
             .catch((error) => {
               reject(error)
             })

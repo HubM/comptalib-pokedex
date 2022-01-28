@@ -25,16 +25,18 @@
   }
 
   @media screen and (min-width: $screen-xs) {
-    background: $color-dark-2;
-    @include transitionMixin;
+    &--dark {
+      background: $color-dark-2;
+      @include transitionMixin;
 
-    &:hover,
-    &:active {
-      opacity: 1;
-      background-color: $color-primary;
+      &:hover,
+      &:active {
+        opacity: 1;
+        background-color: $color-primary;
 
-      .card__title {
-        color: $color-dark-1;
+        .card__title {
+          color: $color-dark-1;
+        }
       }
     }
   }

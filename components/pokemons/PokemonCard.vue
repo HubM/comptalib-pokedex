@@ -1,5 +1,5 @@
 <template>
-  <nuxt-link :to="`/pokemon/${pokemon.id}`" class="card">
+  <nuxt-link :to="`/pokemon/${pokemon.id}`" class="card" :class="cardClass">
     <nuxt-img
       format="webp"
       preload
@@ -18,6 +18,15 @@ export default {
     pokemon: {
       type: Object,
       required: true,
+    },
+    mode: {
+      type: String,
+      required: true,
+    },
+  },
+  computed: {
+    cardClass() {
+      return this.mode === 'dark' ? 'card--dark' : ''
     },
   },
 }

@@ -36,9 +36,7 @@ export default {
     }),
   },
   mounted() {
-    this.setTeamIfExist({
-      localForage: this.$localForage,
-    })
+    this.setTeamIfExist(this.$localForage)
   },
 
   methods: {
