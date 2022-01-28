@@ -60,4 +60,18 @@
       animation: hoverButton $animation-duration $timing-function infinite;
     }
   }
+
+  &__team-indicator {
+    position: absolute;
+    top: 0;
+    right: 0px;
+    background: $color-primary;
+    color: $color-dark-1;
+    border-radius: 10px;
+    width: 15px;
+    height: 15px;
+    padding: 2px;
+    text-align: center;
+    font-size: 10px;
+  }
 }

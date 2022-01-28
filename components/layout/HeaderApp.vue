@@ -7,7 +7,7 @@
             >Catch them all &#x270C;</nuxt-link
           >
         </flex-item>
-        <flex-item v-if="team.length" xs6 tag="li">
+        <flex-item v-if="team.length" xs6 tag="li" class="position-relative">
           <button
             class="button header__button"
             @click="$emit('toggle-team-modal')"
@@ -27,6 +27,9 @@
               height="40"
             />
           </button>
+          <span v-if="!showTeam" class="header__team-indicator">{{
+            team.length
+          }}</span>
         </flex-item>
       </flex-container>
     </nav>
