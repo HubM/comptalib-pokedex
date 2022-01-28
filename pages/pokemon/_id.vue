@@ -47,7 +47,7 @@ export default {
     let abilities = null
 
     if (!store.state.pokemons.defaultPokemons.length) {
-      pokemon = await store.dispatch('pokemons/getPokemon', id)
+      pokemon = await store.dispatch('pokemon/getPokemon', id)
     } else {
       const findInStore = store.state.pokemons.defaultPokemons.find(
         (pokemon) => pokemon.id === id
@@ -56,13 +56,13 @@ export default {
       if (findInStore) {
         pokemon = findInStore
       } else {
-        pokemon = await store.dispatch('pokemons/getPokemon', id)
+        pokemon = await store.dispatch('pokemon/getPokemon', id)
       }
     }
 
     if (pokemon.abilities.length) {
       abilities = await store.dispatch(
-        'pokemons/getPokemonAbilities',
+        'pokemon/getPokemonAbilities',
         pokemon.abilities
       )
     }
