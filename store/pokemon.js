@@ -1,6 +1,8 @@
 import {
   formatPokemonDetails,
   formatPokemonAbilities,
+  formatPokemonSpecies,
+  formatPokemonEvolution,
 } from '~/helpers/functions/format/pokemon'
 
 export const actions = {
@@ -23,6 +25,20 @@ export const actions = {
           formatPokemonAbilities(data)
         )
         resolve(abilities)
+      })
+    })
+  },
+  getPokemonSpecies({ commit, state }, { url }) {
+    return new Promise((resolve, reject) => {
+      this.$axios.get(url).then(({ data }) => {
+        resolve(formatPokemonSpecies(data))
+      })
+    })
+  },
+  getPokemonEvolution({ commit, state }, url) {
+    return new Promise((resolve, reject) => {
+      this.$axios.get(url).then(({ data }) => {
+        resolve(formatPokemonEvolution(data))
       })
     })
   },

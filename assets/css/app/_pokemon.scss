@@ -23,15 +23,15 @@
     text-align: left;
 
     &__name {
-      text-transform: capitalize;
       text-align: center;
     }
 
     &__informations {
       margin: $spc-medium 0;
       text-align: center;
-      &__title {
-        font-size: 1rem;
+
+      &__section {
+        margin-bottom: $spc-large;
       }
     }
 

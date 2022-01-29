@@ -11,26 +11,64 @@
         Add to my team &#x1F918;
       </button>
       <div class="pokemon__details__informations">
-        <h2 class="pokemon__details__informations__title">Characteristics</h2>
-        <ul>
-          <li v-if="pokemonHeight">Height : {{ pokemonHeight }}</li>
-          <li v-if="pokemonWeight">Weight : {{ pokemonWeight }}</li>
-        </ul>
-        <h2
+        <div class="pokemon__details__informations__section">
+          <h2 class="pokemon__details__informations__title">Characteristics</h2>
+          <ul class="list-classic">
+            <li>
+              <p v-if="pokemon.isBaby" class="margin-null">Baby &#x1F476;</p>
+              <p v-else class="margin-null">Adult &#x1F9D4;</p>
+            </li>
+            <li v-if="pokemonHeight">{{ pokemonHeight }} &#x1F4CB;</li>
+            <li v-if="pokemonWeight">{{ pokemonWeight }} &#x1F4CB;</li>
+            <li v-if="pokemon.isLegendary">Legendary pokemon &#x1F947;</li>
+            <li v-if="pokemon.isMythical">Mythical pokemon &#x1F396;</li>
+            <li v-if="pokemon.happiness" v-html="pokemonHappiness" />
+          </ul>
+        </div>
+        <div
           v-if="pokemon.abilities"
-          class="pokemon__details__informations__title"
+          class="pokemon__details__informations__section"
         >
-          abilities
-        </h2>
-        <ul>
-          <li
-            v-for="({ name, effect }, index) in pokemon.abilities"
-            :key="`${name}-${index}`"
-          >
-            <h3 v-if="name">{{ name }}</h3>
-            <p v-if="effect">{{ effect }}</p>
-          </li>
-        </ul>
+          <h2 class="pokemon__details__informations__title">Abilities</h2>
+          <ul>
+            <li
+              v-for="({ name, effect }, index) in pokemon.abilities"
+              :key="`${name}-${index}`"
+            >
+              <h3 v-if="name">{{ name }}</h3>
+              <p v-if="effect">{{ effect }}</p>
+            </li>
+          </ul>
+        </div>
+        <div
+          v-if="pokemon.evolution"
+          class="pokemon__details__informations__section"
+        >
+          <h2 class="pokemon__details__informations__title">Evolution</h2>
+          <flex-container class="center-xs start-s">
+            <flex-item
+              v-for="(evolution, index) in pokemon.evolution"
+              :key="`${evolution.name}-${index}`"
+            >
+              <flex-container class="middle-xs">
+                <flex-item v-if="evolution.id !== pokemon.id" tag="p">
+                  <nuxt-link :to="`/pokemon/${evolution.id}`">
+                    {{ evolution.name }}
+                  </nuxt-link>
+                </flex-item>
+                <flex-item v-else tag="p">
+                  {{ evolution.name }}
+                </flex-item>
+                <flex-item
+                  v-if="index !== pokemon.evolution.length - 1"
+                  tag="span"
+                >
+                  &#8594;
+                </flex-item>
+              </flex-container>
+            </flex-item>
+          </flex-container>
+        </div>
       </div>
     </flex-item>
   </flex-container>
@@ -38,40 +76,41 @@
 
 <script>
 import { mapActions } from 'vuex'
+import FlexContainer from '~/components/layout/grid/FlexContainer.vue'
+import FlexItem from '~/components/layout/grid/FlexItem.vue'
 import { formatPokemonCard } from '~/helpers/functions/format/pokemon'
 
 export default {
+  components: { FlexContainer, FlexItem },
   async asyncData({ params, store }) {
     const { id } = params
-    let pokemon = null
-    let abilities = null
 
-    if (!store.state.pokemons.defaultPokemons.length) {
-      pokemon = await store.dispatch('pokemon/getPokemon', id)
-    } else {
-      const findInStore = store.state.pokemons.defaultPokemons.find(
-        (pokemon) => pokemon.id === id
+    const pokemon = await store.dispatch('pokemon/getPokemon', id)
+
+    if (pokemon.species) {
+      Object.assign(
+        pokemon,
+        await store.dispatch('pokemon/getPokemonSpecies', pokemon.species)
       )
-
-      if (findInStore) {
-        pokemon = findInStore
-      } else {
-        pokemon = await store.dispatch('pokemon/getPokemon', id)
-      }
     }
 
-    if (pokemon.abilities.length) {
-      abilities = await store.dispatch(
+    if (pokemon.abilities?.length) {
+      pokemon.abilities = await store.dispatch(
         'pokemon/getPokemonAbilities',
         pokemon.abilities
       )
     }
 
+    if (pokemon.evolutionUrl) {
+      pokemon.evolution = await store.dispatch(
+        'pokemon/getPokemonEvolution',
+        pokemon.evolutionUrl
+      )
+      delete pokemon.evolutionUrl
+    }
+
     return {
-      pokemon: {
-        ...pokemon,
-        abilities,
-      },
+      pokemon,
     }
   },
   head() {
@@ -82,11 +121,42 @@ export default {
   computed: {
     pokemonHeight() {
       if (!this.pokemon.height) return null
-      return `${this.pokemon.height * 100} cm`
+
+      if (this.pokemon.height < 10) {
+        return `${this.pokemon.height * 10} cm`
+      }
+
+      return `${this.pokemon.height / 10} m`
     },
     pokemonWeight() {
       if (!this.pokemon.weight) return null
       return `${this.pokemon.weight / 10} kg`
+    },
+
+    pokemonHappiness() {
+      const { happiness } = this.pokemon
+
+      if (happiness > 0 && happiness <= 42) {
+        return `This pokemon is depressed &#x1F62D;`
+      }
+
+      if (happiness > 42 && happiness <= 84) {
+        return `This pokemon is sad &#x1F61E;`
+      }
+
+      if (happiness > 84 && happiness <= 127) {
+        return `This pokemon is neutral &#x1F610;`
+      }
+
+      if (happiness > 127 && happiness <= 170) {
+        return `This pokemon is positive &#x1F642;`
+      }
+
+      if (happiness > 170 && happiness <= 210) {
+        return `This pokemon is happy &#x1F604;`
+      }
+
+      return `This pokemon is euphoric &#x1F92A;`
     },
   },
   methods: {
