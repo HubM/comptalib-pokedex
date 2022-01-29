@@ -4,7 +4,7 @@
       <nuxt-img
         format="webp"
         preload
-        :src="pokemon.sprite"
+        :src="pokemon.sprites.default"
         :alt="`default picture of ${pokemon.name} pokemon`"
         class="card__image"
       />
@@ -26,7 +26,8 @@
       <nuxt-img
         format="webp"
         preload
-        :src="pokemon.sprite"
+        :src="pokemon.sprites.default"
+        height="100"
         :alt="`default picture of ${pokemon.name} pokemon`"
         class="card__image"
       />

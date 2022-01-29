@@ -41,11 +41,14 @@
           </ul>
         </div>
         <div
-          v-if="pokemon.evolution"
+          v-if="pokemon.evolution.length"
           class="pokemon__details__informations__section"
         >
           <h2 class="pokemon__details__informations__title">Evolution</h2>
-          <flex-container class="center-xs start-s">
+          <flex-container
+            v-if="pokemon.evolution.length > 1"
+            class="center-xs start-s"
+          >
             <flex-item
               v-for="(evolution, index) in pokemon.evolution"
               :key="`${evolution.name}-${index}`"
@@ -68,6 +71,7 @@
               </flex-container>
             </flex-item>
           </flex-container>
+          <p v-else>{{ pokemon.name }} doesn't have evolution</p>
         </div>
       </div>
     </flex-item>

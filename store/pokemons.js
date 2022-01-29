@@ -6,16 +6,28 @@ import {
 export const state = () => ({
   pokemons: [],
   defaultPokemons: [],
+  infiniteScroll: false,
+  apiFullyConsumed: false,
+  apiMaxPokemons: 898,
 })
 
 export const getters = {
   pokemons: (state) => state.pokemons,
+  infiniteScroll: (state) => state.infiniteScroll,
+  apiFullyConsumed: (state) => state.apiFullyConsumed,
 }
 
 export const mutations = {
   ADD_POKEMONS(state, pokemons) {
-    state.pokemons = pokemons.map((pokemon) => formatPokemonCard(pokemon))
-    state.defaultPokemons = pokemons
+    const pokemonsToAdd = pokemons.map((pokemon) => formatPokemonCard(pokemon))
+
+    if (state.pokemons.length) {
+      state.pokemons = [...state.pokemons, ...pokemonsToAdd]
+      state.defaultPokemons = [...state.pokemons, ...pokemonsToAdd]
+      return
+    }
+    state.pokemons = pokemonsToAdd
+    state.defaultPokemons = pokemonsToAdd
   },
   FILTER_POKEMONS(state, pokemons) {
     state.pokemons = pokemons
@@ -28,43 +40,52 @@ export const mutations = {
   SET_LOADING(state, loading) {
     state.loading = loading
   },
+  SET_INFINITE_SCROLL(state, infiniteScroll) {
+    state.infiniteScroll = infiniteScroll
+  },
+  SET_API_FULLY_CONSUMED(state) {
+    state.apiFullyConsumed = true
+  },
 }
 
 export const actions = {
-  getPokemons({ commit, state }, payload = { limit: 5 }) {
+  getPokemons({ commit, state }, { maxPokemons }) {
     return new Promise((resolve, reject) => {
-      if (state.pokemons.length) {
-        resolve()
-        return
-      }
-
       const { API_URL } = this.app.$config
       const pokemonPromises = []
+      const offset = state.pokemons.length
 
-      for (let i = 1; i <= payload.limit; i++) {
-        const url = `${API_URL}/pokemon/${i}`
+      for (let i = 1; i <= maxPokemons; i++) {
+        if (i + offset > state.apiMaxPokemons) {
+          commit('SET_API_FULLY_CONSUMED')
+          break
+        }
+        const url = `${API_URL}/pokemon/${i + offset}`
         pokemonPromises.push(this.$axios.get(url))
       }
-
       Promise.all(pokemonPromises)
         .then((responses) => {
           const pokemons = responses.map(({ data }) =>
             formatPokemonDetails(data)
           )
+
           commit('ADD_POKEMONS', pokemons)
         })
         .finally(() => resolve())
     })
   },
-  searchPokemon({ commit, state, getters }, search) {
+  searchPokemon({ commit, dispatch, state }, search) {
+    dispatch('setInfiniteScroll', false)
     const pokemons = state.pokemons.filter((pokemon) =>
       new RegExp(search, 'i').test(pokemon.name)
     )
     commit('FILTER_POKEMONS', pokemons)
   },
-  restoreDefaultPokemons({ commit }) {
-    return new Promise((resolve, reject) => {
-      commit('RESTORE_DEFAULT_POKEMONS')
-    })
+  restoreDefaultPokemons({ commit, dispatch }) {
+    commit('RESTORE_DEFAULT_POKEMONS')
+    dispatch('setInfiniteScroll', true)
+  },
+  setInfiniteScroll({ commit }, infiniteScroll) {
+    commit('SET_INFINITE_SCROLL', infiniteScroll)
   },
 }

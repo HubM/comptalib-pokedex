@@ -6,7 +6,9 @@ export function formatPokemonCard({ id, name, sprites }) {
   return {
     id,
     name: capitalize(name),
-    sprite: sprites.default,
+    sprites: {
+      default: sprites.default,
+    },
   }
 }
 
@@ -66,7 +68,7 @@ export function formatPokemonSpecies({
     isBaby: is_baby || false,
     isLegendary: is_legendary || false,
     isMythical: is_mythical || false,
-    habitat: capitalize(habitat.name) || null,
+    habitat: habitat && habitat.name ? capitalize(habitat.name) : null,
   }
 }
 
