@@ -102,6 +102,8 @@ export default {
           this.getPokemons({
             maxPokemons: this.maxPokemons,
           })
+        } else {
+          this.loaderClass = 'loader--hidden'
         }
       })
     },
