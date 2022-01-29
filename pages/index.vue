@@ -49,10 +49,15 @@ export default {
   },
   async fetch() {
     await this.calculateMaxPokemons()
+    this.setInfiniteScroll(false)
     if (!this.$store.state.pokemons.pokemons.length) {
-      await this.$store.dispatch('pokemons/getPokemons', {
-        maxPokemons: this.maxPokemons,
-      })
+      await this.$store
+        .dispatch('pokemons/getPokemons', {
+          maxPokemons: this.maxPokemons,
+        })
+        .then(() => {
+          this.setInfiniteScroll(true)
+        })
     }
   },
   head() {
