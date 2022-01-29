@@ -13,7 +13,10 @@
         @search="searchPokemon"
         @restore-default-pokemons="restoreDefaultPokemons"
       />
-      <pokemon-list :pokemons="pokemons" />
+      <pokemon-list
+        :pokemons="pokemons"
+        @hook:mounted="setInfiniteScrollonMounted"
+      />
     </div>
     <div ref="morePokemons" />
   </section>
@@ -26,6 +29,13 @@ import NuxtSSRScreenSize from 'nuxt-ssr-screen-size'
 export default {
   name: 'IndexPage',
   mixins: [NuxtSSRScreenSize.NuxtSSRScreenSizeMixin],
+  beforeRouteEnter(to, from, next) {
+    next((vm) => {
+      if (from.name === 'pokemon-id') {
+        vm.$store.dispatch('pokemons/setInfiniteScroll', false)
+      }
+    })
+  },
   data() {
     return {
       observer: null,
@@ -34,7 +44,11 @@ export default {
   },
   async fetch() {
     await this.calculateMaxPokemons()
-    await this.$store.dispatch('pokemons/getPokemons', this.maxPokemons)
+    if (!this.$store.state.pokemons.pokemons.length) {
+      await this.$store.dispatch('pokemons/getPokemons', {
+        maxPokemons: this.maxPokemons,
+      })
+    }
   },
   head() {
     return {
@@ -45,11 +59,11 @@ export default {
     ...mapGetters({
       pokemons: 'pokemons/pokemons',
       loading: 'pokemons/loading',
+      infiniteScroll: 'pokemons/infiniteScroll',
     }),
   },
   mounted() {
     this.observer = new IntersectionObserver(this.onElementInViewport, {
-      // root: this.$refs.morePokemons,
       rootMargin: '0px',
       threshold: 0.5,
     })
@@ -59,33 +73,30 @@ export default {
   beforeDestroy() {
     this.observer.disconnect()
   },
+
   methods: {
     ...mapActions({
       getPokemons: 'pokemons/getPokemons',
       searchPokemon: 'pokemons/searchPokemon',
       restoreDefaultPokemons: 'pokemons/restoreDefaultPokemons',
+      setInfiniteScroll: 'pokemons/setInfiniteScroll',
     }),
     onElementInViewport(entries) {
-      console.log(entries)
-      // entries.forEach(({ target, isIntersecting }) => {
-      //   if (!isIntersecting) {
-      //     return
-      //   }
-      //   this.observer.unobserve(target)
-      //   setTimeout(() => {
-      //     // const i = target.getAttribute('data-index')
-      //     // this.todos[i].seen = true
-      //     console.log('IVE SEEN U')
-      //   }, 1000)
-      //   console.log(target, isIntersecting)
-      //   // do something ...
-      // })
+      entries.forEach(({ isIntersecting }) => {
+        if (!isIntersecting || !this.infiniteScroll) return
+        this.getPokemons({
+          maxPokemons: this.maxPokemons,
+        })
+      })
     },
     calculateMaxPokemons() {
       return new Promise((resolve) => {
         const { $vssWidth, $vssHeight } = this
         const cardHeight = 150
-        const rows = Math.ceil($vssHeight / cardHeight)
+
+        const totalScreenHeight = $vssHeight / 3 + $vssHeight
+
+        const rows = Math.ceil(totalScreenHeight / cardHeight)
         let columns = 2
 
         if ($vssWidth > 480) {
@@ -96,10 +107,12 @@ export default {
           columns = 6
         }
 
-        this.maxPokemons = rows * columns
-
+        this.maxPokemons = rows * columns * 2
         resolve()
       })
+    },
+    setInfiniteScrollonMounted() {
+      this.setInfiniteScroll(true)
     },
   },
 }

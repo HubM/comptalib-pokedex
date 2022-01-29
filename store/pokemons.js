@@ -6,16 +6,26 @@ import {
 export const state = () => ({
   pokemons: [],
   defaultPokemons: [],
+  infiniteScroll: false,
 })
 
 export const getters = {
   pokemons: (state) => state.pokemons,
+  infiniteScroll: (state) => state.infiniteScroll,
 }
 
 export const mutations = {
   ADD_POKEMONS(state, pokemons) {
-    state.pokemons = pokemons.map((pokemon) => formatPokemonCard(pokemon))
-    state.defaultPokemons = pokemons
+    const pokemonsToAdd = pokemons.map((pokemon) => formatPokemonCard(pokemon))
+
+    if (state.pokemons.length) {
+      state.pokemons = [...state.pokemons, ...pokemonsToAdd]
+      state.defaultPokemons = [...state.pokemons, ...pokemonsToAdd]
+      return
+    }
+
+    state.pokemons = pokemonsToAdd
+    state.defaultPokemons = pokemonsToAdd
   },
   FILTER_POKEMONS(state, pokemons) {
     state.pokemons = pokemons
@@ -28,29 +38,28 @@ export const mutations = {
   SET_LOADING(state, loading) {
     state.loading = loading
   },
+  SET_INFINITE_SCROLL(state, infiniteScroll) {
+    state.infiniteScroll = infiniteScroll
+  },
 }
 
 export const actions = {
-  getPokemons({ commit, state }, maxPokemons) {
+  getPokemons({ commit, state }, { maxPokemons }) {
     return new Promise((resolve, reject) => {
-      if (state.pokemons.length) {
-        resolve()
-        return
-      }
-
       const { API_URL } = this.app.$config
       const pokemonPromises = []
+      const offset = state.pokemons.length
 
       for (let i = 1; i <= maxPokemons; i++) {
-        const url = `${API_URL}/pokemon/${i}`
+        const url = `${API_URL}/pokemon/${i + offset}`
         pokemonPromises.push(this.$axios.get(url))
       }
-
       Promise.all(pokemonPromises)
         .then((responses) => {
           const pokemons = responses.map(({ data }) =>
             formatPokemonDetails(data)
           )
+
           commit('ADD_POKEMONS', pokemons)
         })
         .finally(() => resolve())
@@ -66,5 +75,8 @@ export const actions = {
     return new Promise((resolve, reject) => {
       commit('RESTORE_DEFAULT_POKEMONS')
     })
+  },
+  setInfiniteScroll({ commit }, infiniteScroll) {
+    commit('SET_INFINITE_SCROLL', infiniteScroll)
   },
 }
