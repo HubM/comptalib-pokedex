@@ -37,8 +37,8 @@ export default {
   },
   mounted() {
     this.setTeamIfExist(this.$localForage)
+    this.$localForage.clear()
   },
-
   methods: {
     ...mapActions({
       setTeamIfExist: 'team/setTeamIfExist',

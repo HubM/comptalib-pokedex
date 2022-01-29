@@ -1,11 +1,14 @@
 .loader {
-  display: block;
-  margin: 0 auto;
   @include animationMixin(pokeball, 2s, ease-in-out, infinite);
   opacity: 1;
 
   &--hidden {
     opacity: 0;
     animation: none;
+  }
+
+  svg {
+    display: block;
+    margin: 0 auto;
   }
 }
