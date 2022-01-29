@@ -13,6 +13,7 @@
         @search="searchPokemon"
         @restore-default-pokemons="restoreDefaultPokemons"
       />
+      <back-to-top :device-height="$vssHeight" @click.native="backToTop" />
       <pokemon-list
         :pokemons="pokemons"
         @hook:mounted="setInfiniteScrollonMounted"
@@ -71,7 +72,6 @@ export default {
       rootMargin: '0px',
       threshold: 0.5,
     })
-
     this.observer.observe(this.$refs.morePokemons)
   },
   beforeDestroy() {
@@ -132,6 +132,12 @@ export default {
     },
     removeObserver() {
       this.observer.disconnect()
+    },
+    backToTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      })
     },
   },
 }

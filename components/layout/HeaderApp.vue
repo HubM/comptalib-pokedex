@@ -12,20 +12,8 @@
             class="button header__button"
             @click="$emit('toggle-team-modal')"
           >
-            <nuxt-img
-              v-if="showTeam"
-              src="/cross.svg"
-              alt="Icon to close the modal"
-              width="30"
-              height="30"
-            />
-            <nuxt-img
-              v-else
-              src="/pokeball.svg"
-              alt="The application logo, a pokeball"
-              width="40"
-              height="40"
-            />
+            <icon-cross v-if="showTeam" :width="20" :height="20" />
+            <icon-pokeball v-else />
           </button>
           <span v-if="!showTeam" class="header__team-indicator">{{
             team.length

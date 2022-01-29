@@ -33,3 +33,20 @@
     }
   }
 }
+
+.backToTop {
+  padding: 8px 10px;
+  background-color: $color-primary;
+  border-radius: 50%;
+  position: fixed;
+  right: 30px;
+  bottom: 30px;
+  opacity: 0;
+  transform: translateY(50px);
+  @include transitionMixin;
+
+  &.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
