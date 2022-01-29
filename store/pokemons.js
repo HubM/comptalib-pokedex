@@ -7,11 +7,14 @@ export const state = () => ({
   pokemons: [],
   defaultPokemons: [],
   infiniteScroll: false,
+  apiFullyConsumed: false,
+  apiMaxPokemons: 898,
 })
 
 export const getters = {
   pokemons: (state) => state.pokemons,
   infiniteScroll: (state) => state.infiniteScroll,
+  apiFullyConsumed: (state) => state.apiFullyConsumed,
 }
 
 export const mutations = {
@@ -23,7 +26,6 @@ export const mutations = {
       state.defaultPokemons = [...state.pokemons, ...pokemonsToAdd]
       return
     }
-
     state.pokemons = pokemonsToAdd
     state.defaultPokemons = pokemonsToAdd
   },
@@ -41,6 +43,9 @@ export const mutations = {
   SET_INFINITE_SCROLL(state, infiniteScroll) {
     state.infiniteScroll = infiniteScroll
   },
+  SET_API_FULLY_CONSUMED(state) {
+    state.apiFullyConsumed = true
+  },
 }
 
 export const actions = {
@@ -51,6 +56,10 @@ export const actions = {
       const offset = state.pokemons.length
 
       for (let i = 1; i <= maxPokemons; i++) {
+        if (i + offset > state.apiMaxPokemons) {
+          commit('SET_API_FULLY_CONSUMED')
+          break
+        }
         const url = `${API_URL}/pokemon/${i + offset}`
         pokemonPromises.push(this.$axios.get(url))
       }

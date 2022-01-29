@@ -35,6 +35,7 @@ export default {
     next((vm) => {
       if (from.name === 'pokemon-id') {
         vm.$store.dispatch('pokemons/setInfiniteScroll', false)
+        vm.$store.dispatch('pokemons/restoreDefaultPokemons')
       }
     })
   },
@@ -62,6 +63,7 @@ export default {
     ...mapGetters({
       pokemons: 'pokemons/pokemons',
       infiniteScroll: 'pokemons/infiniteScroll',
+      apiFullyConsumed: 'pokemons/apiFullyConsumed',
     }),
   },
   mounted() {
@@ -73,7 +75,7 @@ export default {
     this.observer.observe(this.$refs.morePokemons)
   },
   beforeDestroy() {
-    this.observer.disconnect()
+    this.removeObserver()
   },
   methods: {
     ...mapActions({
@@ -88,6 +90,13 @@ export default {
           this.loaderClass = 'loader--hidden'
           return
         }
+
+        if (this.apiFullyConsumed) {
+          this.loaderClass = 'loader--hidden'
+          this.removeObserver()
+          return
+        }
+
         if (isIntersecting) {
           this.loaderClass = ''
           this.getPokemons({
@@ -120,6 +129,9 @@ export default {
     },
     setInfiniteScrollonMounted() {
       this.setInfiniteScroll(true)
+    },
+    removeObserver() {
+      this.observer.disconnect()
     },
   },
 }
