@@ -11,6 +11,7 @@
           :pokemon="pokemon"
           :mode="mode"
           :with-delete="withDelete"
+          :no-link="noLink"
           @delete="$emit('delete', index)"
         />
       </flex-item>
@@ -38,6 +39,10 @@ export default {
       default: 'dark',
     },
     withDelete: {
+      type: Boolean,
+      default: false,
+    },
+    noLink: {
       type: Boolean,
       default: false,
     },

@@ -7,6 +7,7 @@
         empty-message="No pokemons in my team"
         mode="light"
         with-delete
+        no-link
         @delete="(index) => $emit('delete', index)"
       />
     </div>

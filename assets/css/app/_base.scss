@@ -55,19 +55,15 @@ footer {
   text-align: center;
   font-style: italic;
   font-size: 0.875rem; //14px
+}
 
-  a {
-    color: $color-primary;
-  }
+a {
+  color: $color-primary;
 }
 
 h1 {
   color: $color-primary;
   letter-spacing: 1px;
-}
-
-h2 {
-  font-size: $font-m;
 }
 
 #__layout {

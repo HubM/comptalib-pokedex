@@ -1,5 +1,7 @@
-import formatPokemonDetails from '~/helpers/functions/format/pokemon/details'
-import formatPokemonCard from '~/helpers/functions/format/pokemon/card'
+import {
+  formatPokemonCard,
+  formatPokemonDetails,
+} from '~/helpers/functions/format/pokemon'
 
 export const state = () => ({
   pokemons: [],
@@ -29,7 +31,7 @@ export const mutations = {
 }
 
 export const actions = {
-  getPokemons({ commit, state }, payload = { limit: 100 }) {
+  getPokemons({ commit, state }, payload = { limit: 5 }) {
     return new Promise((resolve, reject) => {
       if (state.pokemons.length) {
         resolve()
@@ -63,16 +65,6 @@ export const actions = {
   restoreDefaultPokemons({ commit }) {
     return new Promise((resolve, reject) => {
       commit('RESTORE_DEFAULT_POKEMONS')
-    })
-  },
-  getPokemon({ commit, state }, id) {
-    return new Promise((resolve, reject) => {
-      const { API_URL } = this.app.$config
-      const url = `${API_URL}/pokemon/${id}`
-
-      this.$axios
-        .get(url)
-        .then(({ data }) => resolve(formatPokemonDetails(data)))
     })
   },
 }
