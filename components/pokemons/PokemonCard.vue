@@ -27,6 +27,7 @@
         format="webp"
         preload
         :src="pokemon.sprite"
+        height="100"
         :alt="`default picture of ${pokemon.name} pokemon`"
         class="card__image"
       />

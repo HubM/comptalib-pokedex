@@ -31,7 +31,7 @@ export const mutations = {
 }
 
 export const actions = {
-  getPokemons({ commit, state }, payload = { limit: 5 }) {
+  getPokemons({ commit, state }, maxPokemons) {
     return new Promise((resolve, reject) => {
       if (state.pokemons.length) {
         resolve()
@@ -41,7 +41,7 @@ export const actions = {
       const { API_URL } = this.app.$config
       const pokemonPromises = []
 
-      for (let i = 1; i <= payload.limit; i++) {
+      for (let i = 1; i <= maxPokemons; i++) {
         const url = `${API_URL}/pokemon/${i}`
         pokemonPromises.push(this.$axios.get(url))
       }
