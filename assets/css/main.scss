@@ -1,8 +1,10 @@
+// globals
 @import 'globals/reset';
 @import 'globals/variables';
 @import 'globals/utilities';
 @import 'globals/grid';
-
+// app
+@import 'app/keyframes';
 @import 'app/base';
 @import 'app/buttons';
 @import 'app/header';

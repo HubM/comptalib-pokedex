@@ -18,7 +18,9 @@
         @hook:mounted="setInfiniteScrollonMounted"
       />
     </div>
-    <div ref="morePokemons" />
+    <div ref="morePokemons">
+      <loader-app :loader-class="loaderClass" />
+    </div>
   </section>
 </template>
 
@@ -40,6 +42,7 @@ export default {
     return {
       observer: null,
       maxPokemons: 0,
+      loaderClass: 'loader--hidden',
     }
   },
   async fetch() {
@@ -58,7 +61,6 @@ export default {
   computed: {
     ...mapGetters({
       pokemons: 'pokemons/pokemons',
-      loading: 'pokemons/loading',
       infiniteScroll: 'pokemons/infiniteScroll',
     }),
   },
@@ -73,7 +75,6 @@ export default {
   beforeDestroy() {
     this.observer.disconnect()
   },
-
   methods: {
     ...mapActions({
       getPokemons: 'pokemons/getPokemons',
@@ -83,10 +84,16 @@ export default {
     }),
     onElementInViewport(entries) {
       entries.forEach(({ isIntersecting }) => {
-        if (!isIntersecting || !this.infiniteScroll) return
-        this.getPokemons({
-          maxPokemons: this.maxPokemons,
-        })
+        if (!this.infiniteScroll) {
+          this.loaderClass = 'loader--hidden'
+          return
+        }
+        if (isIntersecting) {
+          this.loaderClass = ''
+          this.getPokemons({
+            maxPokemons: this.maxPokemons,
+          })
+        }
       })
     },
     calculateMaxPokemons() {

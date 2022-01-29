@@ -65,16 +65,16 @@ export const actions = {
         .finally(() => resolve())
     })
   },
-  searchPokemon({ commit, state, getters }, search) {
+  searchPokemon({ commit, dispatch, state }, search) {
+    dispatch('setInfiniteScroll', false)
     const pokemons = state.pokemons.filter((pokemon) =>
       new RegExp(search, 'i').test(pokemon.name)
     )
     commit('FILTER_POKEMONS', pokemons)
   },
-  restoreDefaultPokemons({ commit }) {
-    return new Promise((resolve, reject) => {
-      commit('RESTORE_DEFAULT_POKEMONS')
-    })
+  restoreDefaultPokemons({ commit, dispatch }) {
+    commit('RESTORE_DEFAULT_POKEMONS')
+    dispatch('setInfiniteScroll', true)
   },
   setInfiniteScroll({ commit }, infiniteScroll) {
     commit('SET_INFINITE_SCROLL', infiniteScroll)

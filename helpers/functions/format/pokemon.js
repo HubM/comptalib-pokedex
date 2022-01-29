@@ -6,7 +6,9 @@ export function formatPokemonCard({ id, name, sprites }) {
   return {
     id,
     name: capitalize(name),
-    sprite: sprites.default,
+    sprites: {
+      default: sprites.default,
+    },
   }
 }
 
