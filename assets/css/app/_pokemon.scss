@@ -6,9 +6,24 @@
       min-height: 300px;
     }
 
-    &__versions__title {
-      text-align: center;
-      margin: $spc-medium 0 $spc-x-small 0;
+    &__versions {
+      &__title {
+        text-align: center;
+        margin: $spc-medium 0 $spc-x-small 0;
+      }
+      &__image {
+        opacity: 0.5;
+        @include transitionMixin(opacity);
+
+        &.selected {
+          opacity: 1;
+        }
+
+        &:hover,
+        &:active {
+          opacity: 1;
+        }
+      }
     }
 
     @media screen and (min-width: $screen-sm) {
