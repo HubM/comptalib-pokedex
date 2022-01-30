@@ -41,7 +41,7 @@
           </ul>
         </div>
         <div
-          v-if="pokemon.evolution.length"
+          v-if="pokemon.evolution.length && pokemon.evolution.length > 1"
           class="pokemon__details__informations__section"
         >
           <h2 class="pokemon__details__informations__title">Evolution</h2>
@@ -59,7 +59,7 @@
                     {{ evolution.name }}
                   </nuxt-link>
                 </flex-item>
-                <flex-item v-else tag="p">
+                <flex-item v-else tag="p" class="current">
                   {{ evolution.name }}
                 </flex-item>
                 <flex-item
@@ -71,7 +71,6 @@
               </flex-container>
             </flex-item>
           </flex-container>
-          <p v-else>{{ pokemon.name }} doesn't have evolution</p>
         </div>
       </div>
     </flex-item>

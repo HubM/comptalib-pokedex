@@ -1,5 +1,5 @@
 .loader {
-  @include animationMixin(pokeball, 2s, ease-in-out, infinite);
+  @include animationMixin(pokeball, 2s);
   opacity: 1;
 
   &--hidden {

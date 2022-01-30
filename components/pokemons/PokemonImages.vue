@@ -19,7 +19,8 @@
                 width="70"
                 :src="version.sprite"
                 :alt="`default picture of pokemon in ${version.name} version`"
-                class="cursor-pointer"
+                class="cursor-pointer pokemon__sprites__versions__image"
+                :class="selectedClass(version.sprite)"
               />
             </div>
           </flex-item>
@@ -44,6 +45,9 @@ export default {
     }
   },
   methods: {
+    selectedClass(src) {
+      return this.imgSrc === src ? 'selected' : ''
+    },
     setImg(src) {
       if (this.imgSrc !== src) {
         this.imgSrc = src
