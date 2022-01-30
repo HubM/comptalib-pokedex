@@ -20,7 +20,7 @@
 
     &:hover,
     &:active {
-      animation: hoverBaseline $animation-duration $timing-function infinite;
+      @include animationMixin(hoverBaseline);
     }
   }
 
@@ -31,7 +31,7 @@
 
     &:hover,
     &:active {
-      animation: pokeball $animation-duration $timing-function infinite;
+      @include animationMixin(pokeball);
     }
   }
 
