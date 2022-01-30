@@ -3,8 +3,9 @@
 Hello la team Comptalib 👋
 
 Tout d'abord merci de m'avoir permis de pouvoir réaliser ce test technique, je me suis bien amusé ! 🙂
-Afin de m'organiser pendant mon travail, j'ai utilisé ce [projet github](https://github.com/HubM/comptalib-pokedex/projects/1) avec des [issues](https://github.com/HubM/comptalib-pokedex/issues) rédig
-ées sous forme d'US simple.
+Afin de m'organiser pendant mon travail, j'ai utilisé ce [projet github](https://github.com/HubM/comptalib-pokedex/projects/1) avec des [issues](https://github.com/HubM/comptalib-pokedex/issues) rédigées sous forme d'US simple.
+
+Une preview est disponible [ici](https://comptalib-pokedex.herokuapp.com/) 
 
 
 J'espère que ma production sera à la hauteur de vos attentes,  je reste bien évidemment à votre disposition pour toute question éventuelle.
