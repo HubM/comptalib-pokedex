@@ -1,8 +1,10 @@
+@use "variables";
+
 $breakpoints: (
-  's': $screen-sm,
-  'm': $screen-m,
-  'l': $screen-l,
-  'xl': $screen-xl,
+  's': variables.$screen-sm,
+  'm': variables.$screen-m,
+  'l': variables.$screen-l,
+  'xl': variables.$screen-xl,
 );
 
 $prefix: 'fg__';
@@ -14,8 +16,8 @@ $prefix: 'fg__';
 }
 
 .container-fluid {
-  padding-right: $spc-x-small;
-  padding-left: $spc-x-small;
+  padding-right: variables.$spc-x-small;
+  padding-left: variables.$spc-x-small;
 }
 
 .row {
@@ -28,38 +30,38 @@ $prefix: 'fg__';
 
 .gutter {
   &--xs {
-    margin-right: $spc-tiny * -1;
-    margin-left: $spc-tiny * -1;
+    margin-right: variables.$spc-tiny * -1;
+    margin-left: variables.$spc-tiny * -1;
     > .flex-item {
-      padding-right: $spc-tiny;
-      padding-left: $spc-tiny;
+      padding-right: variables.$spc-tiny;
+      padding-left: variables.$spc-tiny;
     }
   }
 
   &--s {
-    margin-right: $spc-x-small * -1;
-    margin-left: $spc-x-small * -1;
+    margin-right: variables.$spc-x-small * -1;
+    margin-left: variables.$spc-x-small * -1;
     > .flex-item {
-      padding-right: $spc-x-small;
-      padding-left: $spc-x-small;
+      padding-right: variables.$spc-x-small;
+      padding-left: variables.$spc-x-small;
     }
   }
 
   &--m {
-    margin-right: $spc-small * -1;
-    margin-left: $spc-small * -1;
+    margin-right: variables.$spc-small * -1;
+    margin-left: variables.$spc-small * -1;
     > .flex-item {
-      padding-right: $spc-small;
-      padding-left: $spc-small;
+      padding-right: variables.$spc-small;
+      padding-left: variables.$spc-small;
     }
   }
 
   &--l {
-    margin-right: $spc-medium * -1;
-    margin-left: $spc-medium * -1;
+    margin-right: variables.$spc-medium * -1;
+    margin-left: variables.$spc-medium * -1;
     > .flex-item {
-      padding-right: $spc-medium;
-      padding-left: $spc-medium;
+      padding-right: variables.$spc-medium;
+      padding-left: variables.$spc-medium;
     }
   }
 }

@@ -1,5 +1,7 @@
+@use "../globals/variables";
+
 .loader {
-  @include animationMixin(pokeball, 2s);
+  @include variables.animationMixin(pokeball, 2s);
   opacity: 1;
 
   &--hidden {

@@ -1,14 +1,16 @@
+@use "../globals/variables";
+
 .card {
   width: 100%;
   max-width: 150px;
   display: block;
-  margin: 0 auto $spc-x-small auto;
-  padding: $spc-tiny;
+  margin: 0 auto variables.$spc-x-small auto;
+  padding: variables.$spc-tiny;
   border-radius: 30px;
   opacity: 0.75;
 
   &:active {
-    color: $color-primary;
+    color: variables.$color-primary;
   }
 
   &__image {
@@ -19,28 +21,28 @@
   &__title {
     text-align: center;
     margin: 0;
-    color: $color-placeholder;
+    color: variables.$color-placeholder;
     font-size: 0.875rem; //14px
   }
 
-  @media screen and (min-width: $screen-xs) {
+  @media screen and (min-width: variables.$screen-xs) {
     &--dark {
-      background: $color-dark-2;
-      @include transitionMixin;
+      background: variables.$color-dark-2;
+      @include variables.transitionMixin;
 
       &:hover,
       &:active {
         opacity: 1;
-        background-color: $color-primary;
+        background-color: variables.$color-primary;
 
         .card__title {
-          color: $color-dark-1;
+          color: variables.$color-dark-1;
         }
       }
     }
   }
 
-  @media screen and (min-width: $screen-sm) {
-    padding: $spc-x-small;
+  @media screen and (min-width: variables.$screen-sm) {
+    padding: variables.$spc-x-small;
   }
 }

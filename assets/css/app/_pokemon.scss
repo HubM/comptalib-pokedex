@@ -1,3 +1,5 @@
+@use "../globals/variables";
+
 .pokemon {
   &__sprites {
     order: 1;
@@ -9,11 +11,11 @@
     &__versions {
       &__title {
         text-align: center;
-        margin: $spc-medium 0 $spc-x-small 0;
+        margin: variables.$spc-medium 0 variables.$spc-x-small 0;
       }
       &__image {
         opacity: 0.5;
-        @include transitionMixin(opacity);
+        @include variables.transitionMixin(opacity);
 
         &.selected {
           opacity: 1;
@@ -26,7 +28,7 @@
       }
     }
 
-    @media screen and (min-width: $screen-sm) {
+    @media screen and (min-width: variables.$screen-sm) {
       order: 0;
     }
   }
@@ -42,17 +44,17 @@
     }
 
     &__informations {
-      margin: $spc-medium 0;
+      margin: variables.$spc-medium 0;
 
       &__section {
-        margin-bottom: $spc-large;
+        margin-bottom: variables.$spc-large;
 
         a {
-          color: $color-light-1;
+          color: variables.$color-light-1;
         }
 
         .current {
-          color: $color-primary;
+          color: variables.$color-primary;
         }
       }
     }
@@ -61,16 +63,16 @@
       margin: 0 auto;
     }
 
-    @media screen and (min-width: $screen-sm) {
+    @media screen and (min-width: variables.$screen-sm) {
       order: 1;
-      padding-left: $spc-large !important;
+      padding-left: variables.$spc-large !important;
 
       &__name {
         text-align: left;
       }
 
       &__informations {
-        margin: $spc-large 0;
+        margin: variables.$spc-large 0;
         text-align: left;
       }
       .button {

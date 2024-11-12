@@ -1,35 +1,37 @@
+@use "../globals/variables";
+
 .button {
   display: block;
   background: none;
   border: none;
   outline: 0;
-  font-size: $font-xs;
+  font-size: variables.$font-xs;
   font-weight: 600;
   text-transform: uppercase;
   cursor: pointer;
   padding: 10px;
   border-radius: 20px;
-  @include transitionMixin;
+  @include variables.transitionMixin;
 
   &--primary {
-    color: $color-primary;
-    border: 1px solid $color-primary;
+    color: variables.$color-primary;
+    border: 1px solid variables.$color-primary;
 
     &:hover,
     &:active {
-      color: $color-dark-1;
-      background: $color-primary;
+      color: variables.$color-dark-1;
+      background: variables.$color-primary;
     }
   }
 
   &--secondary {
-    color: $color-warning;
-    border: 1px solid $color-warning;
+    color: variables.$color-warning;
+    border: 1px solid variables.$color-warning;
 
     &:hover,
     &:active {
-      color: $color-light-1;
-      background: $color-warning;
+      color: variables.$color-light-1;
+      background: variables.$color-warning;
     }
   }
 }
@@ -43,10 +45,10 @@
   border-radius: 50%;
   opacity: 0;
   transform: translateY(50px);
-  @include transitionMixin;
+  @include variables.transitionMixin;
 
   svg {
-    background-color: $color-primary;
+    background-color: variables.$color-primary;
     padding: 15px;
     border-radius: 25px;
   }

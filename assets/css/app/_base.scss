@@ -1,19 +1,21 @@
+@use "../globals/variables";
+
 html {
-  background-color: $color-dark-1;
-  caret-color: $color-primary;
+  background-color: variables.$color-dark-1;
+  caret-color: variables.$color-primary;
 }
 
 .body {
-  @include fontBodyMixin;
+  @include variables.fontBodyMixin;
 
   &.modal-open {
     overflow: hidden;
 
     .header {
-      background-color: $color-primary;
+      background-color: variables.$color-primary;
 
       &__baseline {
-        color: $color-dark-1;
+        color: variables.$color-dark-1;
         pointer-events: none;
 
         &:hover,
@@ -26,7 +28,7 @@ html {
 }
 
 ::placeholder {
-  color: $color-placeholder;
+  color: variables.$color-placeholder;
   font-size: 0.75rem; // 12px
   font-weight: 300;
 }
@@ -38,12 +40,12 @@ html {
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background-color: $color-dark-1;
+  background-color: variables.$color-dark-1;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background-color: $color-primary;
+  background-color: variables.$color-primary;
   border-radius: 10px;
 }
 
@@ -58,11 +60,11 @@ footer {
 }
 
 a {
-  color: $color-primary;
+  color: variables.$color-primary;
 }
 
 h1 {
-  color: $color-primary;
+  color: variables.$color-primary;
   letter-spacing: 1px;
 }
 
@@ -75,17 +77,17 @@ h1 {
   max-width: 70%;
   width: 100%;
   display: block;
-  margin: $spc-large auto 0 auto;
+  margin: variables.$spc-large auto 0 auto;
   padding-bottom: 5rem;
 
-  @media screen and (min-width: $screen-sm) {
+  @media screen and (min-width: variables.$screen-sm) {
     max-width: 80%;
   }
 }
 
 .page-enter-active,
 .page-leave-active {
-  @include transitionMixin(opacity, 1s);
+  @include variables.transitionMixin(opacity, 1s);
 }
 
 .page-enter,

@@ -1,6 +1,8 @@
+@use "../globals/variables";
+
 .header {
-  padding: 10 px $spc-x-small;
-  background-color: $color-dark-2;
+  padding: 10 px variables.$spc-x-small;
+  background-color: variables.$color-dark-2;
   padding: 10px 1rem;
   height: 55px;
 
@@ -14,13 +16,13 @@
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 1.5px;
-    color: $color-light-1;
+    color: variables.$color-light-1;
     opacity: 0.7;
     transform: rotate(0deg);
 
     &:hover,
     &:active {
-      @include animationMixin(hoverBaseline);
+      @include variables.animationMixin(hoverBaseline);
     }
   }
 
@@ -31,7 +33,7 @@
 
     &:hover,
     &:active {
-      @include animationMixin(pokeball);
+      @include variables.animationMixin(pokeball);
     }
   }
 
@@ -39,8 +41,8 @@
     position: absolute;
     top: 5px;
     right: 5px;
-    background: $color-primary;
-    color: $color-dark-1;
+    background: variables.$color-primary;
+    color: variables.$color-dark-1;
     border-radius: 10px;
     width: 15px;
     height: 15px;
